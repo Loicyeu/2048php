@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9507fd02-e28c-4398-a1f6-cf830666344c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modele/BDException.php" beforeDir="false" afterPath="$PROJECT_DIR$/modele/BDException.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modele/SqliteConnexion.php" beforeDir="false" afterPath="$PROJECT_DIR$/modele/SqliteConnexion.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +52,7 @@
       <option name="presentableId" value="Default" />
       <updated>1605628771387</updated>
       <workItem from="1605628772768" duration="1139000" />
-      <workItem from="1605630082661" duration="891000" />
+      <workItem from="1605630082661" duration="1385000" />
     </task>
     <servers />
   </component>
