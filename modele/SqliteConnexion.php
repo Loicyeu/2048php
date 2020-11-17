@@ -8,11 +8,7 @@ class SqliteConnexion {
 
 	private function  __construct() {
 		try {
-
-			//à la place utiliser une constante qui sera initialisée dans config/config.php
-			$dir = dirname(__DIR__);
-			echo $dir;
-			// pas de host, ni de user, ni de password 
+			$dir = dirname(HOME_SITE);
 			$this->connexion = new PDO("sqlite:$dir/db2048.db");
 			$this->connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		} catch (PDOException $e) {
@@ -21,6 +17,10 @@ class SqliteConnexion {
 		}
 	}
 
+    /**
+     * Méthode permettant de récuperer la connection a Sqlite
+     * @return SqliteConnexion
+     */
 	public static function getInstance(): SqliteConnexion{  
 		if(is_null(self::$instance)){
 			self::$instance = new SqliteConnexion();
@@ -38,4 +38,3 @@ class SqliteConnexion {
 	}
 
 }
-?>

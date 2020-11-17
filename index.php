@@ -1,2 +1,6 @@
 <?php
-echo "aa";
+
+include_once "config/config.php";
+include_once "modele/SqliteConnexion.php";
+
+$con = SqliteConnexion::getInstance();
