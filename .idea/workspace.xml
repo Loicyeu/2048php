@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="9507fd02-e28c-4398-a1f6-cf830666344c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modele/BDException.php" beforeDir="false" afterPath="$PROJECT_DIR$/modele/BDException.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modele/SqliteConnexion.php" beforeDir="false" afterPath="$PROJECT_DIR$/modele/SqliteConnexion.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +36,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="proofread" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -52,6 +53,7 @@
       <option name="presentableId" value="Default" />
       <updated>1605628771387</updated>
       <workItem from="1605628772768" duration="1139000" />
+      <workItem from="1605630082661" duration="891000" />
     </task>
     <servers />
   </component>
@@ -63,9 +65,13 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2587" y="163" key="#PHP/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1605630001964" />
-    <state x="2381" y="166" width="996" height="709" key="SettingsEditor" timestamp="1605630069040">
+    <state x="2334" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605630092120">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2381" y="166" width="996" height="709" key="SettingsEditor/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1605630069040" />
+    <state x="2334" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1605630092120" />
+    <state x="2381" y="166" width="996" height="709" key="SettingsEditor" timestamp="1605631246583">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2381" y="166" width="996" height="709" key="SettingsEditor/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1605631246583" />
   </component>
 </project>

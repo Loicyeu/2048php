@@ -1,7 +1,7 @@
 <?php
 require_once("BDException.php");
 
-class SqliteConnexion{
+class SqliteConnexion {
 	
 	private static $instance;
 	private $connexion;
