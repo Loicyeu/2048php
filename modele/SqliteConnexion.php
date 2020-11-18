@@ -8,8 +8,8 @@ class SqliteConnexion {
 
 	private function  __construct() {
 		try {
-			$dir = dirname(HOME_SITE);
-			$this->connexion = new PDO("sqlite:$dir/db2048.db");
+			$dir = PATH_DATABASE;
+			$this->connexion = new PDO("sqlite:$dir");
 			$this->connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		} catch (PDOException $e) {
 			echo $e->getMessage();
@@ -29,7 +29,7 @@ class SqliteConnexion {
 	}
 
 
-	public function getConnexion() : PDO{
+	public function getConnexion(): PDO {
 		return $this->connexion;
 	}
 
