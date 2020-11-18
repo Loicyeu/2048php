@@ -29,7 +29,7 @@ class SqliteConnexion {
 	}
 
 
-	public function getConnexion(): PDO{
+	public function getConnexion() : PDO{
 		return $this->connexion;
 	}
 
