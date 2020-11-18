@@ -3,4 +3,6 @@
 
 interface Vue {
 
+    public function display();
+
 }

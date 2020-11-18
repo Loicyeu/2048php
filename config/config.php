@@ -4,6 +4,7 @@ define("HOME_SITE", dirname(__DIR__));
 
 // Chemin vers les répertoires liés au modèle MVC
 define("PATH_CONTROLEUR", HOME_SITE."/controleur");
+define("PATH_HTMLCSS", HOME_SITE."/htmlCss");
 define("PATH_MODELE", HOME_SITE."/modele");
 define("PATH_VUE", HOME_SITE."/vue");
 
