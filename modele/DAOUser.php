@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 include_once PATH_MODELE."/BDException.php";
 include_once PATH_MODELE."/SqliteConnexion.php";

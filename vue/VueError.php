@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 include_once PATH_VUE."/Vue.php";
 

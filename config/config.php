@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 // Chemin complet de la racine du site sur le serveur.
 define("HOME_SITE", dirname(__DIR__));

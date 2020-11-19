@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 include_once PATH_VUE . "/VueLogin.php";
 include_once PATH_VUE . "/VueGame.php";
@@ -19,9 +18,9 @@ class Router {
 
     public function route() {
         if(isset($_SESSION['pseudo'])){
-
+            echo "connecter";
         }else{
-
+            echo "non connecter";
         }
     }
 
