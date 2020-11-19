@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 
 interface Vue {
