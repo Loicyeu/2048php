@@ -2,7 +2,7 @@
 
 include_once PATH_VUE."/Vue.php";
 
-class Game implements Vue {
+class VueGame implements Vue {
 
     public function display() {
         include(PATH_HTMLCSS . "/htmlHead.php");

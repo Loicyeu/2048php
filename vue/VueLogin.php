@@ -2,7 +2,7 @@
 
 include_once PATH_VUE."/Vue.php";
 
-class Login implements Vue {
+class VueLogin implements Vue {
 
     public function display() {
         include(PATH_HTMLCSS . "/htmlHead.php");
