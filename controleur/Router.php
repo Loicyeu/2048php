@@ -1,26 +1,24 @@
 <?php
 
-include_once PATH_VUE . "/VueLogin.php";
-include_once PATH_VUE . "/VueGame.php";
-include_once PATH_VUE . "/VueError.php";
+include_once PATH_CONTROLEUR . "/ControllerLogin.php";
+include_once PATH_CONTROLEUR . "/ControllerGame.php";
 
 class Router {
 
-    private $vueLogin;
-    private $vueGame;
-    private $vueError;
+    private $controllerLogin;
+    private $controllerGame;
 
     public function __construct() {
-        $this->vueLogin = new VueLogin();
-        $this->vueGame = new VueGame();
-        $this->vueError = new VueError();
+        $this->controllerLogin = new ControllerLogin();
+        $this->controllerGame = new ControllerGame();
     }
 
     public function route() {
         if(isset($_SESSION['pseudo'])){
-            echo "connecter";
+
         }else{
-            echo "non connecter";
+            $this->controllerLogin = new ControllerLogin();
+            $this->controllerLogin->login();
         }
     }
 
