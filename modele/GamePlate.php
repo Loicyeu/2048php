@@ -45,12 +45,38 @@ class GamePlate {
     }
 
     private function fusion(string $move) {
-        if($move == "vertical") {                       // (2,0,2,16) -> (2,2,16) -> (4,16)
-                                                        // (2,2,4,4) -> (2,2,4,4) -> (4,4,4)
-                                                        // <=  (0,32,4,4)
-
-        }else if($move == "horizontal") {
-
+        if($move == "up" || $move == "down") {
+            for($i = 0; $i < 4; $i++) {
+                if($this->gamePlate[1][$i] == $this->gamePlate[2][$i]) {
+                    $this->gamePlate[2][$i] *= 2;
+                    $this->gamePlate[1][$i] = 0;
+                } else {
+                    if($this->gamePlate[2][$i] == $this->gamePlate[3][$i]) {
+                        $this->gamePlate[3][$i] *= 2;
+                        $this->gamePlate[2][$i] = 0;
+                    }
+                    if($this->gamePlate[0][$i] == $this->gamePlate[1][$i]) {
+                        $this->gamePlate[1][$i] *= 2;
+                        $this->gamePlate[0][$i] = 0;
+                    }
+                }
+            }
+        }else if($move == "right" || $move == "left") {
+            for($i = 0; $i < 4; $i++) {
+                if($this->gamePlate[$i][1] == $this->gamePlate[$i][2]) {
+                    $this->gamePlate[$i][2] *= 2;
+                    $this->gamePlate[$i][1] = 0;
+                } else {
+                    if($this->gamePlate[$i][2] == $this->gamePlate[$i][3]) {
+                        $this->gamePlate[$i][3] *= 2;
+                        $this->gamePlate[$i][2] = 0;
+                    }
+                    if($this->gamePlate[$i][0] == $this->gamePlate[$i][1]) {
+                        $this->gamePlate[$i][1] *= 2;
+                        $this->gamePlate[$i][0] = 0;
+                    }
+                }
+            }
         }
     }
 
