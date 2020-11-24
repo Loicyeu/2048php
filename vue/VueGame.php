@@ -49,4 +49,10 @@ class VueGame implements Vue {
         include(PATH_HTMLCSS . "/htmlFoot.php");
     }
 
+    public function display_test(string $s) {
+        include(PATH_HTMLCSS . "/htmlHead.php");
+        echo $s;
+        include(PATH_HTMLCSS . "/htmlFoot.php");
+    }
+
 }

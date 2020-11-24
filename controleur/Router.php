@@ -15,7 +15,7 @@ class Router {
 
     public function route() {
         if(isset($_SESSION['pseudo'])){
-
+            $this->controllerGame->play();
         }else{
             $this->controllerLogin = new ControllerLogin();
             $this->controllerLogin->login();
