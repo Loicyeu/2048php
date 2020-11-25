@@ -1,8 +1,6 @@
 <?php
 
-include_once PATH_VUE."/Vue.php";
-
-class VueLogin implements Vue {
+class VueLogin {
 
     public function display() {
         include(PATH_HTMLCSS . "/htmlHead.php");
@@ -20,7 +18,7 @@ class VueLogin implements Vue {
         <div class='text-center h-100'>
             <form class='form-signin w-25' action='index.php' method='post'>
                 <!--<img class='mb-4' src='/docs/4.5/assets/brand/bootstrap-solid.svg' alt='' width='72' height='72'>-->
-                <h1 class='h3 mb-3 font-weight-normal'>Please sign in</h1>
+                <h1 class='h3 mb-3 font-weight-normal'>Connecter vous pour jouer à 2048</h1>
                 <label for='pseudo' class='sr-only'>Email address</label>
                 <input type='text' id='pseudo' name='pseudo' class='form-control' placeholder='Pseudo' required autofocus>
                 <label for='password' class='sr-only'>Password</label>

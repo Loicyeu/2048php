@@ -23,7 +23,7 @@ class ControllerLogin {
                 $dao = new DAOUser();
                 if ($dao->exists($_POST['pseudo'], $_POST['password'])) {
                     $_SESSION['pseudo'] = $_POST['pseudo'];
-                    $this->vueGame->display();
+                    $this->vueGame->display_home();
                 } else {
                     $this->vueError->displayTest("mauvais mdp ou pseudo");
                 }

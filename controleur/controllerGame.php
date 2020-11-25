@@ -7,6 +7,7 @@ class controllerGame {
 
     private $vueGame;
 
+
     /**
      * controllerGame constructor.
      */
@@ -15,6 +16,11 @@ class controllerGame {
     }
 
     public function play() {
-        $this->vueGame->display_test((new GamePlate())->display());
+        if(isset($_SESSION['gameplate'])){
+            $this->vueGame->display_test(GamePlate::load()->move()->get_html());
+        }else {
+            $this->vueGame->display_test(GamePlate::create_new()->get_html());
+        }
+
     }
 }

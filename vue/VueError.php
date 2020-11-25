@@ -1,8 +1,6 @@
 <?php
 
-include_once PATH_VUE."/Vue.php";
-
-class VueError implements Vue {
+class VueError {
 
     public function display() {
         include(PATH_HTMLCSS . "/htmlHead.php");

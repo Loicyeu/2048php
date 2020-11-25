@@ -1,47 +1,92 @@
-h1{
-    font-size: 5em;
-}
-
 .tile{
     background-color: #CDC1B4;
+    border-radius:5px;
+    padding-top: 10px;
+    text-align: center;
+    margin:7px;
 }
 .tile-2{
     background-color: #EEE4DA;
     font-weight: bold;
     color: #776E65;
+    font-size: 55px;
 }
 .tile-4 {
     background-color: #EDE0C8;
+    font-weight: bold;
     color: #776E65;
+    font-size: 55px;
 }
 .tile-8 {
     background-color: #F2B179;
+    font-weight: bold;
     color: white;
+    font-size: 55px;
+}
+.tile-16 {
+    background-color: #f59563;
+    font-weight: bold;
+    color: white;
+    font-size: 45px;
+}
+.tile-32 {
+    background-color: #f67c5f;
+    font-weight: bold;
+    color: white;
+    font-size: 45px;
+}
+.tile-64 {
+    background-color: #f65e3b;
+    font-weight: bold;
+    color: white;
+    font-size: 45px;
+}
+.tile-128 {
+    background-color: #edcf72;
+    font-weight: bold;
+    color: white;
+    font-size: 45px;
+}
+.tile-256 {
+    background-color: #edcc61;
+    font-weight: bold;
+    color: white;
+    font-size: 45px;
+}
+.tile-512 {
+    background-color: #edc850;
+    font-weight: bold;
+    color: white;
+    font-size: 45px;
+}
+.tile-1024 {
+    background-color: #edc53f;
+    font-weight: bold;
+    color: white;
+    font-size: 35px;
+}
+.tile-2048 {
+    background-color: #edc22e;
+    font-weight: bold;
+    color: white;
+    font-size: 35px;
 }
 
 .grid-container{
     display: inline-grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(4,1fr);
-    border: 2px solid #BBADA0;
+    grid-template-columns: repeat(4, 120px);
+    grid-template-rows: repeat(4,120px);
+    border: 7px solid #BBADA0;
+    border-radius: 5px;
     margin: 55px;
-
-}
-
-.grid-item{
-    border-radius:5px;
-    border: 1px solid rgba(0,0,0,0.5);
-    padding: 50px;
-    text-align: center;
-    font-size: 40px;
-    margin:7px;
+    background-color: #BBADA0;
 }
 
 .move-grid{
     display: inline-grid;
     grid-template-columns: repeat(3,1fr);
     grid-template-rows: repeat(3,1fr);
-    padding:10px;
+    padding: 10px;
 }
 
 .up{
@@ -70,4 +115,23 @@ h1{
     grid-column-end:3;
     grid-row-start:3;
     grid-row-end:3;
+}
+
+button {
+    height: 50px;
+    width: 50px;
+}
+
+.begin{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 494px;
+    width: 494px;
+    margin: 55px;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.blur{
+    filter: blur(2px);
 }

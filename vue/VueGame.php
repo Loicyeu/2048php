@@ -1,12 +1,9 @@
 <?php
 
-include_once PATH_VUE."/Vue.php";
-
-class VueGame implements Vue {
+class VueGame {
 
     public function display() {
         include(PATH_HTMLCSS . "/htmlHead.php");
-        //<body>
         ?>
 
         <div class="grid-container">
@@ -32,8 +29,8 @@ class VueGame implements Vue {
             <form action="index.php" method="GET" class="up">
                  <input name="up" type="submit" value="/\">
             </form>
-            <form action="index.php" method="post" class="left>
-                <input name="left" type="submit" value="<">
+            <form action="index.php" method="GET" class="left">
+                <input name="POST" type="submit" value="<">
             </form>
             <form action="index.php" method="GET" class="right">
                 <input name="right" type="submit" value=">">
@@ -45,13 +42,59 @@ class VueGame implements Vue {
 
 
         <?php
-        //</body>
         include(PATH_HTMLCSS . "/htmlFoot.php");
     }
 
     public function display_test(string $s) {
         include(PATH_HTMLCSS . "/htmlHead.php");
         echo $s;
+        echo "<div class='move-grid'>
+            <form action='index.php' method='GET' class='up'>
+                <button type='submit' name='up'>
+                    <img src='assets/arrow-up-solid.svg' alt='/\'/>
+                </button>
+            </form>
+            <form action='index.php' method='GET' class='left'>
+                <button type='submit' name='left'>
+                    <img src='assets/arrow-left-solid.svg' alt='>'/>
+                </button>
+            </form>
+            <form action='index.php' method='GET' class='right'>
+                <button type='submit' name='right'>
+                    <img src='assets/arrow-right-solid.svg' alt='V'/>
+                </button>
+            </form>
+            <form action='index.php' method='GET' class='down'>
+                <button type='submit' name='down'>
+                    <img src='assets/arrow-down-solid.svg' alt='<'/>
+                </button>
+            </form>
+        </div>";
+        include(PATH_HTMLCSS . "/htmlFoot.php");
+    }
+
+    public function display_home() {
+        //TODO:
+        // - interface permettant de choisir si on veut commencer une nouvelle game
+        // - ou charger celle en sauvegarde s'il y en a une
+        $str = "<div class='grid-container blur'>";
+        for ($i=0; $i<16; $i++)
+            $str .= "<div class='tile'></div>";
+        $str .= "</div>";
+
+        include(PATH_HTMLCSS . "/htmlHead.php");
+        echo $str;
+        echo "
+        <div class='begin'>
+            <h1 style='text-align: center; margin-top: 5px'>Le jeu du 2048</h1>
+            <form method='post' action='index.php' style='text-align: center'>
+                <input type='submit' value='Nouvelle partie' name='new'>
+            </form>
+            <form method='post' action='index.php' style='text-align: center'>
+                <input type='submit' value='Charger partie' name='save'>
+            </form>
+        </div>
+        ";
         include(PATH_HTMLCSS . "/htmlFoot.php");
     }
 
