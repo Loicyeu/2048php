@@ -46,8 +46,8 @@ class GamePlate {
      * @return GamePlate Vrai si le joueur a gagné, faux sinon.
      */
     public function move(): GamePlate {
-        $vueGame = new VueGame();
-        $vueGame->display_test($this->get_html());
+//        $vueGame = new VueGame();
+//        $vueGame->display_test($this->get_html());
 
         if(isset($_GET["up"])) {
             $this->arrange("up");
@@ -72,7 +72,15 @@ class GamePlate {
         if($this->has_won()) {
             //TODO win
         }
-        //TODO détecter plateau plein -> perdu
+
+        if(!$this->anyZeros()) {
+            if($this->isFull()) {
+                //TODO game lost
+                echo "game lost";
+                $_SESSION['gameplate'] = $this->gamePlate;
+                return $this;
+            }
+        }
         do {
             $randValueX = rand(0,3);
             $randValueY = rand(0,3);
@@ -80,7 +88,6 @@ class GamePlate {
         $this->gamePlate[$randValueX][$randValueY] = 4/rand(1,2);
         $_SESSION['gameplate'] = $this->gamePlate;
         return $this;
-
     }
 
     /**
@@ -190,17 +197,29 @@ class GamePlate {
      * @return bool Vrai si la grille est pleine et sans possibilité de fusion, faux sinon.
      */
     private function isFull(): bool {
-//        for($i=0; $i<4; $i++) {
-//            for ($j = $i%2+1; $j < 3; $j+=2) {
-//                if($this->equalsOnTheSides($i, $j))
+//        for ($i=0; $i<3 ;$i++) {
+//            for ($j=0; $j<3 ;$j++) {
+//                if($this->gamePlate[$i][$j]==$this->gamePlate[$i][$j+1] && $this->gamePlate[$i][$j]!=0) {
 //                    return false;
+//                }
 //            }
 //        }
 //        return true;
+        for($i=0; $i<3; $i++) {
+            for($j=0; $j<3; $j++) {
+                if(
 
-        for ($i=0; $i<3 ;$i++) {
-            for ($j=0; $j<3 ;$j++) {
-                if($this->gamePlate[$i][$j]==$this->gamePlate[$i][$j+1] || $this->gamePlate[$i][$j]!=0) {
+                    ($this->gamePlate[$i][$j] == $this->gamePlate[$i][$j+1]
+                        || $this->gamePlate[$i][$j] == 0
+                        || $this->gamePlate[$i][$j+1] == 0 )
+
+                    ||
+
+                    ($this->gamePlate[$i][$j] == $this->gamePlate[$i+1][$j]
+                        || $this->gamePlate[$i][$j] == 0
+                        || $this->gamePlate[$i+1][$j] == 0))
+
+                {
                     return false;
                 }
             }
@@ -208,19 +227,15 @@ class GamePlate {
         return true;
     }
 
-    /**
-     * Méthode permettant de savoir si la case renseignée par les paramètres possède une case voisine de valeur égale.
-     * @param int $i i
-     * @param int $j j
-     * @return bool Vrai si la case renseignée à une case voisine égale, faux sinon.
-     */
-    private function equalsOnTheSides(int $i, int $j) : bool {
-        if($i == 0) {
-
-        }else {
-
+    private function anyZeros() : bool {
+        for($i=0; $i<4; $i++) {
+            for($j=0; $j<4; $j++) {
+                if($this->gamePlate[$i][$j] == 0) return true;
+            }
         }
+        return false;
     }
+
 
     /**
      * Méthode permettant de récupéré le plateau de jeu en HTML pour être affiché.
