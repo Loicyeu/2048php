@@ -12,7 +12,6 @@ class BDException extends Exception {
 
 }
 
-
 /**
  * Class ConnexionException
  * Exception relative à un probleme de connexion

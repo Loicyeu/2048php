@@ -190,10 +190,19 @@ class GamePlate {
      * @return bool Vrai si la grille est pleine et sans possibilité de fusion, faux sinon.
      */
     private function isFull(): bool {
-        for($i=0; $i<4; $i++) {
-            for ($j = $i%2+1; $j < 3; $j+=2) {
-                if($this->equalsOnTheSides($i, $j))
+//        for($i=0; $i<4; $i++) {
+//            for ($j = $i%2+1; $j < 3; $j+=2) {
+//                if($this->equalsOnTheSides($i, $j))
+//                    return false;
+//            }
+//        }
+//        return true;
+
+        for ($i=0; $i<3 ;$i++) {
+            for ($j=0; $j<3 ;$j++) {
+                if($this->gamePlate[$i][$j]==$this->gamePlate[$i][$j+1] || $this->gamePlate[$i][$j]!=0) {
                     return false;
+                }
             }
         }
         return true;
