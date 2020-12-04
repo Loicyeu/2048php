@@ -135,3 +135,11 @@ button {
 .blur{
     filter: blur(2px);
 }
+
+.score {
+    background-color: #CDC1B4;
+    border-radius:5px;
+    padding-top: 10px;
+    text-align: center;
+    margin:7px;
+}

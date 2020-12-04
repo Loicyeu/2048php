@@ -51,7 +51,6 @@ class DAOParties {
         }
     }
 
-
     /**
      * Méthode permettant de mettre a jour la partie acutelle dans la base de donnée.
      * @param string $pseudo Le pseudo du joueur
@@ -62,9 +61,11 @@ class DAOParties {
      */
     public function update_current_game(string $pseudo, array $gamePlate, int $score): bool {
         try{
-
+            $previous = $this->get_current_game($pseudo);
+            $statement = $this->connexion->prepare("UPDATE CURRENT_PARTIES SET gameplate=?, score=?, previousgameplate=?, previousscore=? WHERE pseudo=?");
+            return $statement->execute(array(serialize($gamePlate), $score, serialize($previous["gameplate"]), $previous["score"], $pseudo));
         }catch (PDOException $e) {
-            throw new SQLException("Problème requête SQL sur la table parties");
+            throw new SQLException("Problème requête SQL sur la table parties!!");
         }
     }
 
