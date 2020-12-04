@@ -137,9 +137,10 @@ button {
 }
 
 .score {
-    background-color: #CDC1B4;
+    width:25%;
+    margin-top:2%;
+    margin-left:10%;
+    color: white;
+    background-color: #BBADA0;
     border-radius:5px;
-    padding-top: 10px;
-    text-align: center;
-    margin:7px;
 }
