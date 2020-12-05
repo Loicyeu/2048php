@@ -10,6 +10,7 @@ class GamePlate {
     private $gamePlate;
     private $pseudo;
     private $score;
+    private $dao;
 
     /**
      * GamePlate constructor.
@@ -22,7 +23,7 @@ class GamePlate {
         $this->gamePlate = $gamePlate;
         $this->pseudo = $pseudo;
         $this->score = $score;
-        $_SESSION['gameplate'] = $gamePlate;
+        $this->dao = new DAOParties();
     }
 
     /**
@@ -63,38 +64,37 @@ class GamePlate {
 
     /**
      * Méthode permettant de faire un déplacement, et tester si le joueur a gagné.
-     * @return GamePlate Vrai si le joueur a gagné, faux sinon.
+     * @param string $move Un déplacement choisi entre "up", "left", "down", "right".
+     * @return string Retourne <code>won</code> si le joueur a gagné, <code>lost</code> si le joueur a perdu ou <code>continue</code> si la partie n'est pas terminé.
      * @throws SQLException Si une erreur SQL se produit.
      */
-    public function move(string $move): GamePlate {
+    public function move(string $move): string {
 
         $this->arrange($move);
         $this->fusion($move);
         $this->arrange($move);
 
         if($this->has_won()) {
-            //TODO win
-            // - set db game win
+            $this->dao->add_score($this->pseudo, true, $this->score);
+            return "won";
         }
 
         if(!$this->any_zeros()) {
             if($this->is_full()) {
-                //TODO game lost
-                // - set db game lost
                 echo "game lost";
-                return $this;
+                $this->dao->add_score($this->pseudo, false, $this->score);
+                return "lost";
             }
         }
+
         do {
             $randValueX = rand(0,3);
             $randValueY = rand(0,3);
         } while($this->gamePlate[$randValueX][$randValueY] != 0);
         $this->gamePlate[$randValueX][$randValueY] = 4/rand(1,2);
 
-        $dao = new DAOParties();
-        $dao->update_current_game($this->pseudo, $this->gamePlate, $this->score);
-        $_SESSION['gameplate'] = $this->gamePlate;
-        return $this;
+        $this->dao->update_current_game($this->pseudo, $this->gamePlate, $this->score);
+        return "continue";
     }
 
     /**

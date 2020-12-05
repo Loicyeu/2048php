@@ -16,18 +16,20 @@ class DAOParties {
     }
 
     /**
-     * Méthode permettant de créer une partie de 2048 dans la base donnée.
+     * Méthode permettant d'ajouter une partie terminée de 2048 dans la base de donnée et de supprimer la partie en cours correspondante.
      * @param string $pseudo le pseudo du joueur
      * @param bool $win Vrai si le joueur a gagné, faux sinon.
      * @param int $score Le score du joueur.
-     * @return bool Vrai si la partie a été ajouté, faux sinon.
+     * @return bool Vrai si la partie a été ajouté, erreur sinon.
      * @throws SQLException Si une erreur se passe lors de la requête SQL.
      */
     public function add_score(string $pseudo, bool $win, int $score): bool {
         try{
             $statement = $this->connexion->prepare("INSERT INTO PARTIES(pseudo, gagne, score) VALUES(?, ?, ?)");
             $statement->execute(array($pseudo, $win, $score));
-            return $statement->fetch(PDO::FETCH_ASSOC);
+            if(!$this->delete_current_game($pseudo)) {
+                throw new SQLException("Problème requête SQL sur la table current_parties");
+            }
         }catch (PDOException $e){
             throw new SQLException("Problème requête SQL sur la table parties");
         }
@@ -65,7 +67,7 @@ class DAOParties {
             $statement = $this->connexion->prepare("UPDATE CURRENT_PARTIES SET gameplate=?, score=?, previousgameplate=?, previousscore=? WHERE pseudo=?");
             return $statement->execute(array(serialize($gamePlate), $score, serialize($previous["gameplate"]), $previous["score"], $pseudo));
         }catch (PDOException $e) {
-            throw new SQLException("Problème requête SQL sur la table parties!!");
+            throw new SQLException("Problème requête SQL sur la table parties");
         }
     }
 
@@ -83,7 +85,23 @@ class DAOParties {
             $result["gameplate"] = unserialize($result["gameplate"]);
             return $result;
         }catch (PDOException $e) {
-            throw new SQLException($e->getMessage());
+            throw new SQLException("Problème requête SQL sur la table parties");
+        }
+    }
+
+    /**
+     * Méthode permettant de supprimer la partie en cours d'un joueur
+     * @param string $pseudo le pseudo du joueur
+     * @return bool vrai si la partie a été supprimé, faux sinon.
+     * @throws SQLException Si une erreur se passe lors de la requête SQL.
+     */
+    public function delete_current_game(string $pseudo): bool {
+        try {
+            $statement = $this->connexion->prepare("DELETE FROM CURRENT_GAME WHERE pseudo=?");
+            $statement->execute(array($pseudo));
+            return $statement->fetch(PDO::FETCH_ASSOC);
+        }catch (PDOException $e) {
+            throw new SQLException("Problème requête SQL sur la table parties");
         }
     }
 }
