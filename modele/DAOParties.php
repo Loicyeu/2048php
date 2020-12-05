@@ -27,13 +27,13 @@ class DAOParties {
         try{
             $statement = $this->connexion->prepare("INSERT INTO PARTIES(pseudo, gagne, score) VALUES(?, ?, ?)");
             $statement->execute(array($pseudo, $win, $score));
-            if(!$this->delete_current_game($pseudo)) {
-                throw new SQLException("Problème requête SQL sur la table current_parties");
-            }
+            $this->delete_current_game($pseudo);
+            return true;
         }catch (PDOException $e){
             throw new SQLException("Problème requête SQL sur la table parties");
         }
     }
+
 
     /**
      * Méthode permettant de créer une nouvelle partie en cours dans la base de donnée.
@@ -49,12 +49,12 @@ class DAOParties {
             $statement->execute(array($pseudo, serialize($gamePlate), $score, serialize($gamePlate), $score));
             return $statement->fetch(PDO::FETCH_ASSOC);
         }catch (PDOException $e) {
-            throw new SQLException($e->getMessage());
+            throw new SQLException("Problème requête SQL sur la table current_parties");
         }
     }
 
     /**
-     * Méthode permettant de mettre a jour la partie acutelle dans la base de donnée.
+     * Méthode permettant de mettre a jour la partie actuelle dans la base de donnée.
      * @param string $pseudo Le pseudo du joueur
      * @param array $gamePlate Le plateau de jeu actuel
      * @param int $score le score actuel
@@ -67,7 +67,7 @@ class DAOParties {
             $statement = $this->connexion->prepare("UPDATE CURRENT_PARTIES SET gameplate=?, score=?, previousgameplate=?, previousscore=? WHERE pseudo=?");
             return $statement->execute(array(serialize($gamePlate), $score, serialize($previous["gameplate"]), $previous["score"], $pseudo));
         }catch (PDOException $e) {
-            throw new SQLException("Problème requête SQL sur la table parties");
+            throw new SQLException("Problème requête SQL sur la table current_parties");
         }
     }
 
@@ -85,7 +85,7 @@ class DAOParties {
             $result["gameplate"] = unserialize($result["gameplate"]);
             return $result;
         }catch (PDOException $e) {
-            throw new SQLException("Problème requête SQL sur la table parties");
+            throw new SQLException("Problème requête SQL sur la table current_parties");
         }
     }
 
@@ -97,11 +97,27 @@ class DAOParties {
      */
     public function delete_current_game(string $pseudo): bool {
         try {
-            $statement = $this->connexion->prepare("DELETE FROM CURRENT_GAME WHERE pseudo=?");
+            $statement = $this->connexion->prepare("DELETE FROM CURRENT_PARTIES WHERE pseudo=?");
             $statement->execute(array($pseudo));
             return $statement->fetch(PDO::FETCH_ASSOC);
         }catch (PDOException $e) {
-            throw new SQLException("Problème requête SQL sur la table parties");
+            throw new SQLException("Problème requête SQL sur la table current_parties");
+        }
+    }
+
+    /**
+     * Méthode permettant de savoir si un joueur a une partie en cours dans la base de donnée.
+     * @param string $pseudo Le pseudo du joueur.
+     * @return bool Vrai si le joueur a une partie en cours, faux sinon.
+     * @throws SQLException Si une erreur se passe lors de la requête SQL.
+     */
+    public function exists_current_game(string  $pseudo): bool {
+        try {
+            $statement = $this->connexion->prepare("SELECT COUNT(pseudo) AS nb FROM CURRENT_PARTIES WHERE pseudo=? LIMIT 1");
+            $statement->execute(array($pseudo));
+            return $statement->fetch(PDO::FETCH_ASSOC)['nb'];
+        }catch (PDOException $e) {
+            throw new SQLException("Problème requête SQL sur la table current_parties");
         }
     }
 }

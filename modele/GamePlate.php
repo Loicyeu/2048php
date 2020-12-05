@@ -42,7 +42,7 @@ class GamePlate {
         try{
             $dao->create_current_game($pseudo, $gamePlate, 0);
         } catch (SQLException $e) {
-
+            //TODO
         }
         return new GamePlate($pseudo, $gamePlate, 0);
     }
@@ -51,14 +51,19 @@ class GamePlate {
      * Récupère le plateau de jeu en cours du joueurs.
      * @param string $pseudo Le pseudo du joueur.
      * @return GamePlate Le plateau de jeu en cours du joueurs.
+     * @throws SQLException
      */
     public static function load(string $pseudo): GamePlate {
         $dao = new DAOParties();
         try {
-            $game = $dao->get_current_game($pseudo);
-            return new GamePlate($pseudo, $game['gameplate'], $game['score']);
+            if($dao->exists_current_game($pseudo)) {
+                $game = $dao->get_current_game($pseudo);
+                return new GamePlate($pseudo, $game['gameplate'], $game['score']);
+            }else{
+                return self::create_new($pseudo);
+            }
         } catch (SQLException $e) {
-            //TODO
+            throw new SQLException($e->getMessage());
         }
     }
 
