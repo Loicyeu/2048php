@@ -1,3 +1,4 @@
+/*region TILES*/
 .tile{
     background-color: #CDC1B4;
     border-radius:5px;
@@ -71,7 +72,9 @@
     color: white;
     font-size: 35px;
 }
+/*endregion*/
 
+/*region GAMEPLATE*/
 .grid-container{
     display: inline-grid;
     grid-template-columns: repeat(4, 120px);
@@ -81,12 +84,19 @@
     margin: 55px;
     background-color: #BBADA0;
 }
-
 .move-grid{
     display: inline-grid;
     grid-template-columns: repeat(3,1fr);
     grid-template-rows: repeat(3,1fr);
     padding: 10px;
+}
+.score {
+    width:25%;
+    margin-top:2%;
+    margin-left:10%;
+    color: white;
+    background-color: #BBADA0;
+    border-radius:5px;
 }
 
 .up{
@@ -95,21 +105,18 @@
     grid-row-start:1;
     grid-row-end:1;
 }
-
 .left{
     grid-column-start:1;
     grid-column-end:2;
     grid-row-start:2;
     grid-row-end:2;
 }
-
 .right{
     grid-column-start:3;
     grid-column-end:4;
     grid-row-start:2;
     grid-row-end:2;
 }
-
 .down{
     grid-column-start:2;
     grid-column-end:3;
@@ -131,16 +138,101 @@ button {
     margin: 55px;
     background-color: rgba(0, 0, 0, 0.2);
 }
-
 .blur{
     filter: blur(2px);
 }
+/*endregion*/
 
-.score {
-    width:25%;
-    margin-top:2%;
-    margin-left:10%;
-    color: white;
-    background-color: #BBADA0;
-    border-radius:5px;
+/*region FORM LOGIN*/
+
+.form-label-group {
+    position: relative;
+    margin-bottom: 1rem;
 }
+
+.form-label-group input,
+.form-label-group label {
+    height: 3.125rem;
+    padding: .75rem;
+}
+
+.form-label-group label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    margin-bottom: 0; /* Override default `<label>` margin */
+    line-height: 1.5;
+    color: #495057;
+    pointer-events: none;
+    cursor: text; /* Match the input under the label */
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    transition: all .1s ease-in-out;
+    text-align: left;
+}
+
+.form-label-group input::-webkit-input-placeholder {
+    color: transparent;
+}
+
+.form-label-group input::-moz-placeholder {
+    color: transparent;
+}
+
+.form-label-group input:-ms-input-placeholder {
+    color: transparent;
+}
+
+.form-label-group input::-ms-input-placeholder {
+    color: transparent;
+}
+
+.form-label-group input::placeholder {
+    color: transparent;
+}
+
+.form-label-group input:not(:-ms-input-placeholder) {
+    padding-top: 1.25rem;
+    padding-bottom: .25rem;
+}
+
+.form-label-group input:not(:placeholder-shown) {
+    padding-top: 1.25rem;
+    padding-bottom: .25rem;
+}
+
+.form-label-group input:not(:-ms-input-placeholder) ~ label {
+    padding-top: .25rem;
+    padding-bottom: .25rem;
+    font-size: 12px;
+    color: #777;
+}
+
+.form-label-group input:not(:placeholder-shown) ~ label {
+    padding-top: .25rem;
+    padding-bottom: .25rem;
+    font-size: 12px;
+    color: #777;
+}
+
+/* Fallback for Edge
+-------------------------------------------------- */
+@supports (-ms-ime-align: auto) {
+    .form-label-group {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column-reverse;
+        flex-direction: column-reverse;
+    }
+
+    .form-label-group label {
+        position: static;
+    }
+
+    .form-label-group input::-ms-input-placeholder {
+        color: #777;
+    }
+}
+/*endregion*/

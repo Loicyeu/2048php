@@ -13,10 +13,10 @@ class GamePlate {
 
     /**
      * GamePlate constructor.
-     * Génère un nouveau plateau de jeu avec deux carreaux initialisé à 2 et placé aléatoirement..
-     * @param string $pseudo le pseudo du joueur
-     * @param array $gamePlate  plateau de jeu.
-     * @param int $score
+     * Génère un nouveau plateau de jeu avec deux carreaux initialisé à 2 et placés aléatoirement.
+     * @param string $pseudo Le pseudo du joueur.
+     * @param array $gamePlate Le plateau de jeu.
+     * @param int $score le score du joueur.
      */
     private function __construct(string $pseudo, array $gamePlate, int $score) {
         $this->gamePlate = $gamePlate;
@@ -27,10 +27,10 @@ class GamePlate {
 
     /**
      * Génère un nouveau plateau de jeu avec deux carreaux initialisé à 2 et placé aléatoirement.
-     * @param string $pseudo Le pseudo du joueur
-     * @return GamePlate Le nouveau plateau de jeu
+     * @param string $pseudo Le pseudo du joueur.
+     * @return GamePlate Le nouveau plateau de jeu.
      */
-    public static function create_new(string $pseudo) {
+    public static function create_new(string $pseudo): GamePlate {
         $gamePlate = array(array(0, 0, 0, 0), array(0, 0, 0, 0), array(0, 0, 0, 0), array(0, 0, 0, 0));
         $firstValueIndex = rand(0,15);
         do $secondValueIndex = rand(0,15);
@@ -48,10 +48,10 @@ class GamePlate {
 
     /**
      * Récupère le plateau de jeu en cours du joueurs.
-     * @param string $pseudo
-     * @return GamePlate Le plateau de jeu en cours du joueurs
+     * @param string $pseudo Le pseudo du joueur.
+     * @return GamePlate Le plateau de jeu en cours du joueurs.
      */
-    public static function load(string $pseudo) {
+    public static function load(string $pseudo): GamePlate {
         $dao = new DAOParties();
         try {
             $game = $dao->get_current_game($pseudo);
@@ -64,38 +64,21 @@ class GamePlate {
     /**
      * Méthode permettant de faire un déplacement, et tester si le joueur a gagné.
      * @return GamePlate Vrai si le joueur a gagné, faux sinon.
+     * @throws SQLException Si une erreur SQL se produit.
      */
-    public function move(): GamePlate {
-//        $vueGame = new VueGame();
-//        $vueGame->display_test($this->get_html());
+    public function move(string $move): GamePlate {
 
-        if(isset($_GET["up"])) {
-            $this->arrange("up");
-            $this->fusion("up");
-            $this->arrange("up");
-        }else if (isset($_GET["right"])) {
-            $this->arrange("right");
-            $this->fusion("right");
-            $this->arrange("right");
-        }else if (isset($_GET["left"])) {
-            $this->arrange("left");
-            $this->fusion("left");
-            $this->arrange("left");
-        }else if (isset($_GET["down"])) {
-            $this->arrange("down");
-            $this->fusion("down");
-            $this->arrange("down");
-        } else {
-            //ERREUR
-        }
+        $this->arrange($move);
+        $this->fusion($move);
+        $this->arrange($move);
 
         if($this->has_won()) {
             //TODO win
             // - set db game win
         }
 
-        if(!$this->anyZeros()) {
-            if($this->isFull()) {
+        if(!$this->any_zeros()) {
+            if($this->is_full()) {
                 //TODO game lost
                 // - set db game lost
                 echo "game lost";
@@ -116,7 +99,7 @@ class GamePlate {
 
     /**
      * Méthode qui permet de faire les fusions sur les lignes ou colonnes selon un déplacement choisi.
-     * @param string $move Un déplacement choisi entre "up", "left", "down", "right"
+     * @param string $move Un déplacement choisi entre "up", "left", "down", "right".
      */
     private function fusion(string $move): void {
         for($i = 0; $i < 4; $i++) {
@@ -150,7 +133,7 @@ class GamePlate {
 
     /**
      * Méthode qui permet de décaler tous les carreaux sur les lignes ou colonnes selon un déplacement choisi.
-     * @param string $move Un déplacement choisi entre "up", "left", "down", "right"
+     * @param string $move Un déplacement choisi entre "up", "left", "down", "right".
      */
     private function arrange(string $move): void {
 
@@ -224,7 +207,7 @@ class GamePlate {
      * Méthode permettant de savoir si la grille est pleine et qu'aucune fusion n'est possible.
      * @return bool Vrai si la grille est pleine et sans possibilité de fusion, faux sinon.
      */
-    private function isFull(): bool {
+    private function is_full(): bool {
 //        for ($i=0; $i<3 ;$i++) {
 //            for ($j=0; $j<3 ;$j++) {
 //                if($this->gamePlate[$i][$j]==$this->gamePlate[$i][$j+1] && $this->gamePlate[$i][$j]!=0) {
@@ -255,7 +238,11 @@ class GamePlate {
         return true;
     }
 
-    private function anyZeros() : bool {
+    /**
+     * Méthode permettant de savoir s'il reste des cases vide sur le plateau.
+     * @return bool Vrai s'il reste des cases vides, faux sinon.
+     */
+    private function any_zeros() : bool {
         for($i=0; $i<4; $i++) {
             for($j=0; $j<4; $j++) {
                 if($this->gamePlate[$i][$j] == 0) return true;
@@ -269,7 +256,7 @@ class GamePlate {
      * Méthode permettant de récupéré le plateau de jeu en HTML pour être affiché.
      * @return string Le plateau de jeu en version HTML.
      */
-    public function get_html(): string {
+    public function to_html(): string {
         $str = "<div class='score'>".$this->score."</div>";
         $str .= "<div class='grid-container'>";
         for($i=0; $i<4; $i++){

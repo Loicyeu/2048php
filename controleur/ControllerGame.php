@@ -20,13 +20,11 @@ class controllerGame {
 
     public function play() {
         if(isset($_SESSION['gameplate'])){
-            $this->vueGame->display_test(GamePlate::load($_SESSION["pseudo"])->move()->get_html());
+            $this->vueGame->display(GamePlate::load($_SESSION["pseudo"])->move($_GET['move'])->to_html());
         }else {
-            $this->vueGame->display_test(GamePlate::create_new($_SESSION["pseudo"])->get_html());
+            $this->vueGame->display(GamePlate::create_new($_SESSION["pseudo"])->to_html());
         }
-
-
-
+        
     }
 
 }

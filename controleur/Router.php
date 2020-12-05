@@ -20,9 +20,8 @@ class Router {
         if(isset($_SESSION['pseudo'])){
             $this->controllerGame->play();
         }else if(isset($_GET["register"])) {
-            $this->controllerRegister;
+            $this->controllerRegister->register();
         }else{
-            $this->controllerLogin = new ControllerLogin();
             $this->controllerLogin->login();
         }
     }

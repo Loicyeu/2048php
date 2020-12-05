@@ -25,10 +25,10 @@ class ControllerLogin {
                     $_SESSION['pseudo'] = $_POST['pseudo'];
                     $this->vueGame->display_home();
                 } else {
-                    $this->vueError->displayTest("mauvais mdp ou pseudo");
+                    $this->vueError->display("Le pseudo ou le mot de passe est faux.");
                 }
             }catch (SQLException $e) {
-                $this->vueError->displayTest("Erreur SQL");
+                $this->vueError->display("Erreur SQL");
             }
         }else{
             $this->vueLogin->display();
