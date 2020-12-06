@@ -92,9 +92,10 @@ class DAOParties {
     }
 
     /**
-     * Méthode permettant de récupérer la partie actuelle avec un mouvement de retard dans la base de donnée
-     * @param string $pseudo Le pseudo du joueur
-     * @return array Un dictionnaire contenant la <tt>gameplate</tt> et le <tt>score</tt>
+     * Méthode permettant de récupérer la partie actuelle avec un mouvement de retard dans la base de donnée.
+     * Cette méthode modifie la partie en cours en dupliquant la game actuelle par la précédente.
+     * @param string $pseudo Le pseudo du joueur.
+     * @return array Un dictionnaire contenant la <tt>gameplate</tt> et le <tt>score</tt>.
      * @throws SQLException Si une erreur se passe lors de la requête SQL.
      */
     public function get_previous_current_game(string $pseudo): array {
@@ -103,6 +104,7 @@ class DAOParties {
             $statement->execute(array($pseudo));
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $result["gameplate"] = unserialize($result["gameplate"]);
+            $this->update_current_game($pseudo, $result["gameplate"], $result["score"]);
             return $result;
         }catch (PDOException $e) {
             throw new SQLException("Problème requête SQL sur la table current_parties");

@@ -92,14 +92,6 @@
     margin: 0 3%;
     background-color: #BBADA0;
 }
-.move-grid{
-    position: absolute;
-    top: 284px;
-    display: inline-grid;
-    grid-template-columns: repeat(3,1fr);
-    grid-template-rows: repeat(3,1fr);
-    padding: 10px;
-}
 .scoreHead{
     width: 494px;
     margin: 3% 0 0 3%;
@@ -125,6 +117,22 @@
 }
 .scoreButtons button:hover{
     border: #CDC1B4 2px solid;
+    background-color: #BBADA0;
+}
+
+form.move-grid{
+    position: absolute;
+    display: inline-grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: repeat(3,1fr);
+    padding: 10px;
+}
+form.move-grid button{
+    border-radius: 5px;
+    border: 0;
+    background-color: #CDC1B4;
+}
+form.move-grid button:hover{
     background-color: #BBADA0;
 }
 

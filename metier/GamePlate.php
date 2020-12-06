@@ -136,7 +136,7 @@ class GamePlate {
         if(!$gameEnd){
             $str .= "
                 <div class='scoreHead'>
-                    <div class='score'>Score : ".$this->score."</div>
+                    <div class='score'>Score : $this->score</div>
                     <form action='/' method='get' class='scoreButtons'>
                         <button type='submit' name='previous' title='Précédent'>
                             <img src='/assets/backward-solid.svg' alt='Précédent'>
@@ -151,7 +151,7 @@ class GamePlate {
         for($i=0; $i<4; $i++){
             for($j=0; $j<4; $j++) {
                 $value = $this->gamePlate[$i][$j]==0?"":$this->gamePlate[$i][$j];
-                $str .= "<div class='tile".($value!=""?" tile-".$value:"")."'>".$value."</div>";
+                $str .= "<div class='tile".($value!=""?" tile-$value":"")."'>$value</div>";
             }
         }
         $str .= "</div>";

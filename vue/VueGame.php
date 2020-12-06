@@ -8,8 +8,9 @@ class VueGame {
      */
     public function display(string $html) {
         include(PATH_HTMLCSS . "/htmlHead.php");
-        echo $html;
-        echo "<form action='/' method='GET' class='move-grid'>
+        echo "
+            $html
+            <form action='/' method='GET' class='move-grid'>
                 <button type='submit' name='move' value='up' class='up'>
                     <img src='assets/arrow-up-solid.svg' alt='/\'/>
                 </button>
