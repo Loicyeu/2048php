@@ -107,16 +107,17 @@ class GamePlate {
     }
 
     /**
-     * Méthode permettant de récupéré le plateau de jeu en HTML pour être affiché.
+     * Méthode permettant de récupéré le plateau de jeu et le score en HTML pour être affiché.
+     * @param bool $gameEnd Si la partie est terminé, par défaut non.
      * @return string Le plateau de jeu en version HTML.
      */
-    public function to_html(): string {
-        $str = "<div class='score'>".$this->score."</div>";
-        $str .= "<div class='grid-container'>";
+    public function to_html(bool $gameEnd=false): string {
+        $str = $gameEnd?"":"<div class='score'>Score : ".$this->score."</div>";
+        $str .= "<div class='grid-container".($gameEnd?" blur'>":"'>");
         for($i=0; $i<4; $i++){
             for($j=0; $j<4; $j++) {
                 $value = $this->gamePlate[$i][$j]==0?"":$this->gamePlate[$i][$j];
-                $str .= "<div class='tile tile-".$value."'>".$value."</div>";
+                $str .= "<div class='tile".($value!=""?" tile-".$value:"")."'>".$value."</div>";
             }
         }
         $str .= "</div>";

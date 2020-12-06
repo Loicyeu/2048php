@@ -29,48 +29,56 @@
     font-weight: bold;
     color: white;
     font-size: 45px;
+    padding-top: 18px;
 }
 .tile-32 {
     background-color: #f67c5f;
     font-weight: bold;
     color: white;
     font-size: 45px;
+    padding-top: 18px;
 }
 .tile-64 {
     background-color: #f65e3b;
     font-weight: bold;
     color: white;
     font-size: 45px;
+    padding-top: 18px;
 }
 .tile-128 {
     background-color: #edcf72;
     font-weight: bold;
     color: white;
     font-size: 45px;
+    padding-top: 18px;
 }
 .tile-256 {
     background-color: #edcc61;
     font-weight: bold;
     color: white;
     font-size: 45px;
+    padding-top: 18px;
 }
 .tile-512 {
     background-color: #edc850;
     font-weight: bold;
     color: white;
     font-size: 45px;
+    padding-top: 18px;
 }
 .tile-1024 {
     background-color: #edc53f;
     font-weight: bold;
     color: white;
     font-size: 35px;
+    padding-top: 28px;
 }
 .tile-2048 {
     background-color: #edc22e;
     font-weight: bold;
     color: white;
     font-size: 35px;
+    padding-top: 28px;
 }
 /*endregion*/
 
@@ -85,6 +93,8 @@
     background-color: #BBADA0;
 }
 .move-grid{
+    position: absolute;
+    top: 284px;
     display: inline-grid;
     grid-template-columns: repeat(3,1fr);
     grid-template-rows: repeat(3,1fr);
@@ -94,12 +104,10 @@
     background-color: #BBADA0;
     color:white;
     width: 10%;
-    margin-left:30.5%;
+    margin-left:10.5%;
     margin-top:1%;
     padding: 1% 1% 1% 1%;
     text-align: center;
-    border-radius: 5px;
-    font-weight: bold;
 }
 
 .up{
@@ -131,18 +139,35 @@ button {
     height: 50px;
     width: 50px;
 }
+/*endregion*/
 
-.begin{
+/*region GAMEPLATE MENUS*/
+div.menu{
     position: absolute;
     top: 0;
     left: 0;
     height: 494px;
     width: 494px;
     margin: 55px;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.5);
 }
+
 .blur{
     filter: blur(2px);
+}
+
+h1.menu{
+    padding: 20px;
+    color: #edc22e;
+}
+
+h2.won{
+    color: lightgreen;
+    text-align: center;
+}
+h2.lost{
+    color: lightcoral;
+    text-align: center;
 }
 /*endregion*/
 

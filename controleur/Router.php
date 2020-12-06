@@ -16,6 +16,9 @@ class Router {
         $this->controllerRegister = new ControllerRegister();
     }
 
+    /**
+     * Méthode permettant de choisir le bon contrôleur en fonction de la situation.
+     */
     public function route() {
         if(isset($_SESSION['pseudo'])){
             $this->controllerGame->play();

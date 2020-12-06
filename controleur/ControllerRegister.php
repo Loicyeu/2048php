@@ -20,6 +20,10 @@ class controllerRegister {
 
     }
 
+    /**
+     * Méthode permettant au joueur de se créer un compte.
+     * Si une erreur se produit alors une vue d'erreur s'affichera.
+     */
     public function register() {
         if (isset($_POST['pseudo']) && isset($_POST['password']) && isset($_POST['passwordRepeat'])) {
             try {

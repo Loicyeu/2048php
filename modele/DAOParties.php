@@ -37,6 +37,7 @@ class DAOParties {
 
     /**
      * Méthode permettant de créer une nouvelle partie en cours dans la base de donnée.
+     * Si une partie en cours est trouvé, elle sera alors supprimé et remplacé.
      * @param string $pseudo Le pseudo du joueur
      * @param array $gamePlate Le plateau de jeu initialisé
      * @param int $score Le score actuel du joueur
@@ -45,6 +46,8 @@ class DAOParties {
      */
     public function create_current_game(string $pseudo, array $gamePlate, int $score): bool {
         try{
+            if($this->exists_current_game($pseudo))
+                $this->delete_current_game($pseudo);
             $statement = $this->connexion->prepare("INSERT INTO CURRENT_PARTIES VALUES(?, ?, ?, ?, ?)");
             $statement->execute(array($pseudo, serialize($gamePlate), $score, serialize($gamePlate), $score));
             return $statement->fetch(PDO::FETCH_ASSOC);

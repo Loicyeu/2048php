@@ -17,6 +17,10 @@ class ControllerLogin {
         $this->vueGame = new VueGame();
     }
 
+    /**
+     * Méthode permettant au joueur de se connecter.
+     * Si une erreur se produit alors une vue d'erreur s'affichera.
+     */
     public function login() {
         if (isset($_POST['pseudo']) && isset($_POST['password'])) {
             try {
@@ -28,7 +32,7 @@ class ControllerLogin {
                     $this->vueError->display("Le pseudo ou le mot de passe est faux.");
                 }
             }catch (SQLException $e) {
-                $this->vueError->display("Erreur SQL");
+                $this->vueError->display($e->getMessage());
             }
         }else{
             $this->vueLogin->display();
