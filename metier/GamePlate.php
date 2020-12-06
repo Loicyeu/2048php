@@ -1,6 +1,6 @@
 <?php
 
-include_once PATH_VUE."/VueGame.php";
+include_once PATH_VUE . "/VueGame.php";
 
 /**
  * Classe représentant le plateau de jeu.
@@ -90,7 +90,6 @@ class GamePlate {
 
         if(!$this->any_zeros()) {
             if($this->is_full()) {
-                echo "game lost";
                 $this->dao->add_score($this->pseudo, false, $this->score);
                 return "lost";
             }
@@ -112,7 +111,21 @@ class GamePlate {
      * @return string Le plateau de jeu en version HTML.
      */
     public function to_html(bool $gameEnd=false): string {
-        $str = $gameEnd?"":"<div class='score'>Score : ".$this->score."</div>";
+        $str = "";
+        if(!$gameEnd){
+            $str .= "
+                <div class='scoreHead'>
+                    <div class='score'>Score : ".$this->score."</div>
+                    <form action='/' method='get' class='scoreButtons'>
+                        <button type='submit' name='previous' title='Précédent'>
+                            <img src='/assets/backward-solid.svg' alt='Précédent'>
+                        </button>
+                        <button type='submit' name='reset' title='Recommencer'>
+                            <img src='/assets/redo-solid.svg' alt='Recommencer'>
+                        </button>
+                    </form>
+                </div>";
+        }
         $str .= "<div class='grid-container".($gameEnd?" blur'>":"'>");
         for($i=0; $i<4; $i++){
             for($j=0; $j<4; $j++) {

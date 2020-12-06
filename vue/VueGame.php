@@ -32,20 +32,31 @@ class VueGame {
      */
     public function display_home() {
         include(PATH_HTMLCSS . "/htmlHead.php");
-        $str = "<div class='grid-container blur'>";
+        $str = "<div class='grid-container'>";
         for ($i=0; $i<16; $i++)
             $str .= "<div class='tile'></div>";
         $str .= "</div>";
 
+        echo "
+        <div class='scoreHead'>
+            <div class='score'>Score : 0</div>
+            <div class='scoreButtons'>
+                <button title='Précédent'>
+                    <img src='/assets/backward-solid.svg' alt='Précédent'>
+                </button>
+                <button title='Recommencer'>
+                    <img src='/assets/redo-solid.svg' alt='Recommencer'>
+                </button>
+            </div>
+        </div>
+        ";
         echo $str;
         echo "
         <div class='menu'>
-            <h1 style='text-align: center; margin-top: 5px'>Le jeu du 2048</h1>
+            <h1 class='menu'>Le jeu du 2048</h1>
             <form method='post' action='/' style='text-align: center'>
-                <input type='submit' value='Nouvelle partie' name='new' title='Attention cette action supprimera la sauvegarde en cours'>
-            </form>
-            <form method='post' action='/' style='text-align: center'>
-                <input type='submit' value='Charger partie' name='save'>
+                <input class='menu' type='submit' value='Nouvelle partie' name='new' title='Attention cette action supprimera la sauvegarde en cours'>
+                <input class='menu' type='submit' value='Charger partie' name='save'>
             </form>
         </div>
         ";

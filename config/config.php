@@ -7,6 +7,7 @@ define("HOME_SITE", dirname(__DIR__));
 define("PATH_CONTROLEUR", HOME_SITE."/controleur");
 define("PATH_HTMLCSS", HOME_SITE."/htmlCss");
 define("PATH_MODELE", HOME_SITE."/modele");
+define("PATH_METIER", HOME_SITE."/metier");
 define("PATH_VUE", HOME_SITE."/vue");
 
 // Données pour la connexion au SGBD

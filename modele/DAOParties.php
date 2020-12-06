@@ -2,7 +2,6 @@
 
 include_once PATH_MODELE."/BDException.php";
 include_once PATH_MODELE."/SqliteConnexion.php";
-include_once PATH_MODELE."/InvalidSessionException.php";
 
 class DAOParties {
 

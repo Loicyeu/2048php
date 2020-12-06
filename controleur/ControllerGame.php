@@ -3,7 +3,7 @@
 include_once PATH_VUE."/VueGame.php";
 include_once PATH_VUE."/VueResult.php";
 include_once PATH_VUE."/VueError.php";
-include_once PATH_MODELE."/GamePlate.php";
+include_once PATH_METIER . "/GamePlate.php";
 include_once PATH_MODELE."/DAOParties.php";
 
 class controllerGame {
