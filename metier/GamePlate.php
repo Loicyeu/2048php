@@ -69,6 +69,27 @@ class GamePlate {
         }
     }
 
+    /**
+     * Récupère le plateau de jeu au mouvement précédent du joueurs.
+     * @param string $pseudo Le pseudo du joueur.
+     * @return GamePlate Le plateau de jeu en cours du joueurs.
+     * @see GamePlate::load() Si le joueur a déjà utiliser cette action au tour précédent.
+     * @throws SQLException Si une erreur SQL se produit.
+     */
+    public static function load_previous(string $pseudo): GamePlate {
+        $dao = new DAOParties();
+        try {
+            if($dao->exists_current_game($pseudo)) {
+                $game = $dao->get_previous_current_game($pseudo);
+                return new GamePlate($pseudo, $game['gameplate'], $game['score']);
+            }else{
+                return self::create_new($pseudo);
+            }
+        } catch (SQLException $e) {
+            throw new SQLException($e->getMessage());
+        }
+    }
+
 
 
     /**

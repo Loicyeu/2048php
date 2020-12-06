@@ -30,8 +30,10 @@ class controllerGame {
      */
     public function play() {
         try {
-            if(isset($_POST['new'])){
+            if(isset($_POST['new']) || isset($_GET['reset'])){
                 $this->vueGame->display(GamePlate::create_new($_SESSION["pseudo"])->to_html());
+            }else if(isset($_GET['previous'])) {
+                $this->vueGame->display(GamePlate::load_previous($_SESSION["pseudo"])->to_html());
             }else if(isset($_GET['move'])){
                 $gameplate = GamePlate::load($_SESSION["pseudo"]);
                 $res = $gameplate->move($_GET['move']);
