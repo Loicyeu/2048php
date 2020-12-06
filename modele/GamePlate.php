@@ -12,6 +12,8 @@ class GamePlate {
     private $score;
     private $dao;
 
+
+
     /**
      * GamePlate constructor.
      * Génère un nouveau plateau de jeu avec deux carreaux initialisé à 2 et placés aléatoirement.
@@ -51,7 +53,7 @@ class GamePlate {
      * Récupère le plateau de jeu en cours du joueurs.
      * @param string $pseudo Le pseudo du joueur.
      * @return GamePlate Le plateau de jeu en cours du joueurs.
-     * @throws SQLException
+     * @throws SQLException Si une erreur SQL se produit.
      */
     public static function load(string $pseudo): GamePlate {
         $dao = new DAOParties();
@@ -66,6 +68,8 @@ class GamePlate {
             throw new SQLException($e->getMessage());
         }
     }
+
+
 
     /**
      * Méthode permettant de faire un déplacement, et tester si le joueur a gagné.
@@ -103,30 +107,49 @@ class GamePlate {
     }
 
     /**
+     * Méthode permettant de récupéré le plateau de jeu en HTML pour être affiché.
+     * @return string Le plateau de jeu en version HTML.
+     */
+    public function to_html(): string {
+        $str = "<div class='score'>".$this->score."</div>";
+        $str .= "<div class='grid-container'>";
+        for($i=0; $i<4; $i++){
+            for($j=0; $j<4; $j++) {
+                $value = $this->gamePlate[$i][$j]==0?"":$this->gamePlate[$i][$j];
+                $str .= "<div class='tile tile-".$value."'>".$value."</div>";
+            }
+        }
+        $str .= "</div>";
+        return $str;
+    }
+
+
+
+    /**
      * Méthode qui permet de faire les fusions sur les lignes ou colonnes selon un déplacement choisi.
      * @param string $move Un déplacement choisi entre "up", "left", "down", "right".
      */
     private function fusion(string $move): void {
         for($i = 0; $i < 4; $i++) {
-            if($move == "up" || $move == "right") {
+            if($move == "up" || $move == "left") {
                 for($j = 0; $j < 3; $j++) {
                     if($this->gamePlate[$j][$i] == $this->gamePlate[$j+1][$i] && $move == "up") {
                         $this->gamePlate[$j][$i] *= 2;
                         $this->gamePlate[$j+1][$i] = 0;
                         $this->score += $this->gamePlate[$j][$i];
-                    }else if($this->gamePlate[$i][$j] == $this->gamePlate[$i][$j+1] && $move == "right") {
+                    }else if($this->gamePlate[$i][$j] == $this->gamePlate[$i][$j+1] && $move == "left") {
                         $this->gamePlate[$i][$j] *= 2;
                         $this->gamePlate[$i][$j+1] = 0;
                         $this->score += $this->gamePlate[$i][$j];
                     }
                 }
-            }else if($move == "down" || $move == "left") {
+            }else if($move == "down" || $move == "right") {
                 for($j = 3; $j > 0; $j--) {
                     if ($this->gamePlate[$j][$i] == $this->gamePlate[$j-1][$i] && $move == "down") {
                         $this->gamePlate[$j][$i] *= 2;
                         $this->gamePlate[$j-1][$i] = 0;
                         $this->score += $this->gamePlate[$j][$i];
-                    } else if ($this->gamePlate[$i][$j] == $this->gamePlate[$i][$j-1] && $move == "left") {
+                    } else if ($this->gamePlate[$i][$j] == $this->gamePlate[$i][$j-1] && $move == "right") {
                         $this->gamePlate[$i][$j] *= 2;
                         $this->gamePlate[$i][$j-1] = 0;
                         $this->score += $this->gamePlate[$i][$j];
@@ -254,24 +277,6 @@ class GamePlate {
             }
         }
         return false;
-    }
-
-
-    /**
-     * Méthode permettant de récupéré le plateau de jeu en HTML pour être affiché.
-     * @return string Le plateau de jeu en version HTML.
-     */
-    public function to_html(): string {
-        $str = "<div class='score'>".$this->score."</div>";
-        $str .= "<div class='grid-container'>";
-        for($i=0; $i<4; $i++){
-            for($j=0; $j<4; $j++) {
-                $value = $this->gamePlate[$i][$j]==0?"":$this->gamePlate[$i][$j];
-                $str .= "<div class='tile tile-".$value."'>".$value."</div>";
-            }
-        }
-        $str .= "</div>";
-        return $str;
     }
 
 }

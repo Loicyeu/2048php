@@ -23,12 +23,12 @@ class VueGame {
     }
 
     public function display_home() {
+        include(PATH_HTMLCSS . "/htmlHead.php");
         $str = "<div class='grid-container blur'>";
         for ($i=0; $i<16; $i++)
             $str .= "<div class='tile'></div>";
         $str .= "</div>";
 
-        include(PATH_HTMLCSS . "/htmlHead.php");
         echo $str;
         echo "
         <div class='begin'>
