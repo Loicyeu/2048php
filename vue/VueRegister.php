@@ -7,7 +7,7 @@ class VueRegister {
         include(PATH_HTMLCSS . "/htmlHead.php");
         echo "
         <div class='text-center h-100 pt-5'>
-            <form class='w-25 m-auto form-section' action='/' method='post'>
+            <form class='w-25 m-auto form-section' action='/?register' method='post'>
                 <img class='mb-4' src='assets/2048_logo.png' alt='' width='72' height='72'>
                 <h1 class='h3 mb-3 font-weight-normal'>Créer un compte</h1>
                 
