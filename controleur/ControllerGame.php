@@ -5,6 +5,7 @@ include_once PATH_VUE."/VueResult.php";
 include_once PATH_VUE."/VueError.php";
 include_once PATH_METIER . "/GamePlate.php";
 include_once PATH_MODELE."/DAOParties.php";
+include_once PATH_METIER . "/GamePlateEnd.php";
 
 class controllerGame {
 
@@ -12,6 +13,7 @@ class controllerGame {
     private $vueResult;
     private $vueError;
     private $dao;
+    private $gamePlateEnd;
 
     /**
      * controllerGame constructor.
@@ -21,6 +23,7 @@ class controllerGame {
         $this->vueResult = new VueResult();
         $this->vueError = new VueError();
         $this->dao = new DAOParties();
+        $this->gamePlateEnd = new GamePlateEnd();
     }
 
     /**
@@ -38,9 +41,9 @@ class controllerGame {
                 $gameplate = GamePlate::load($_SESSION["pseudo"]);
                 $res = $gameplate->move($_GET['move']);
                 if($res=="won") {
-                    $this->vueResult->display(false, $gameplate->to_html(true));
+                    $this->vueResult->display(true, $gameplate->to_html(false).$this->gamePlateEnd->getScores());
                 }else if ($res=="lost") {
-                    $this->vueResult->display(false, $gameplate->to_html(true));
+                    $this->vueResult->display(false, $gameplate->to_html(false));
                 }else {
                     $this->vueGame->display($gameplate->to_html());
                 }
@@ -52,5 +55,4 @@ class controllerGame {
             $this->vueError->display($e->getMessage());
         }
     }
-
 }

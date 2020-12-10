@@ -136,6 +136,10 @@ form.move-grid button:hover{
     background-color: #BBADA0;
 }
 
+.scoreTab {
+    background-color: #F2B179;
+}
+
 .up{
     grid-column-start:2;
     grid-column-end:3;

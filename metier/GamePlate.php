@@ -132,7 +132,7 @@ class GamePlate {
      * @return string Le plateau de jeu en version HTML.
      */
     public function to_html(bool $gameEnd=false): string {
-        $str = "";
+        $str = "<div class='containerGame'>";
         if(!$gameEnd){
             $str .= "
                 <div class='scoreHead'>
@@ -154,7 +154,7 @@ class GamePlate {
                 $str .= "<div class='tile".($value!=""?" tile-$value":"")."'>$value</div>";
             }
         }
-        $str .= "</div>";
+        $str .= "</div></div>";
         return $str;
     }
 
@@ -258,7 +258,7 @@ class GamePlate {
     private function has_won(): bool {
         for($i = 0; $i < 4; $i++) {
             for($j = 1; $j < 4; $j++) {
-                if($this->gamePlate[$i][$j] == 2048) {
+                if($this->gamePlate[$i][$j] == 32) {
                     return true;
                 }
             }
