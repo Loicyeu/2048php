@@ -1,17 +1,29 @@
 <?php
 
-include_once PATH_VUE . "/VueGame.php";
 
 /**
  * Classe représentant le plateau de jeu.
  */
 class GamePlate {
 
+    //region ATTRIBUTES
+    /**
+     * @var array Le plateau de jeu.
+     */
     private $gamePlate;
+    /**
+     * @var string Le pseudo du joueur.
+     */
     private $pseudo;
+    /**
+     * @var int Le score du joueur.
+     */
     private $score;
+    /**
+     * @var DAOParties Le DAO des parties.
+     */
     private $dao;
-
+    //endregion
 
 
     /**
@@ -28,6 +40,8 @@ class GamePlate {
         $this->dao = new DAOParties();
     }
 
+
+    //region STATIC
     /**
      * Génère un nouveau plateau de jeu avec deux carreaux initialisé à 2 et placé aléatoirement.
      * @param string $pseudo Le pseudo du joueur.
@@ -89,9 +103,10 @@ class GamePlate {
             throw new SQLException($e->getMessage());
         }
     }
+    //endregion
 
 
-
+    //region PUBLIC INSTANCE
     /**
      * Méthode permettant de faire un déplacement, et tester si le joueur a gagné.
      * @param string $move Un déplacement choisi entre "up", "left", "down", "right".
@@ -157,9 +172,10 @@ class GamePlate {
         $str .= "</div></div>";
         return $str;
     }
+    //endregion
 
 
-
+    //region PRIVATE INSTANCE
     /**
      * Méthode qui permet de faire les fusions sur les lignes ou colonnes selon un déplacement choisi.
      * @param string $move Un déplacement choisi entre "up", "left", "down", "right".
@@ -313,5 +329,6 @@ class GamePlate {
         }
         return false;
     }
+    //endregion
 
 }

@@ -9,11 +9,29 @@ include_once PATH_METIER . "/GamePlateEnd.php";
 
 class controllerGame {
 
+    //region ATTRIBUTES
+    /**
+     * @var VueGame La vue de jeu.
+     */
     private $vueGame;
+    /**
+     * @var VueResult La vue des résultat.
+     */
     private $vueResult;
+    /**
+     * @var VueError La vue des erreurs.
+     */
     private $vueError;
+    /**
+     * @var DAOParties Le DAO des parties.
+     */
     private $dao;
+    /**
+     * @var GamePlateEnd Le plateau de jeu de fin.
+     */
     private $gamePlateEnd;
+    //endregion
+
 
     /**
      * controllerGame constructor.
@@ -25,6 +43,7 @@ class controllerGame {
         $this->dao = new DAOParties();
         $this->gamePlateEnd = new GamePlateEnd();
     }
+
 
     /**
      * Méthode permettant de jouer. Si aucun mouvement n'a été choisi,
@@ -40,8 +59,8 @@ class controllerGame {
             }else if(isset($_GET['move'])){
                 $gameplate = GamePlate::load($_SESSION["pseudo"]);
                 $res = $gameplate->move($_GET['move']);
-                if($res=="won") {
-                    $this->vueResult->display(true, $gameplate->to_html(false).$this->gamePlateEnd->getScores());
+                if(true/*$res=="won"*/) {
+                    $this->vueResult->display(true, $gameplate->to_html(false).$this->gamePlateEnd->to_html());
                 }else if ($res=="lost") {
                     $this->vueResult->display(false, $gameplate->to_html(false));
                 }else {

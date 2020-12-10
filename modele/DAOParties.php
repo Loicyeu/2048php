@@ -5,15 +5,23 @@ include_once PATH_MODELE."/SqliteConnexion.php";
 
 class DAOParties {
 
+    //region ATTRIBUTES
+    /**
+     * @var PDO La connexion SQLite
+     */
     private $connexion;
+    //endregion
+
 
     /**
-     * DAOParties constructor.
+     * Constructeur de DAOParties.
      */
     public function __construct() {
         $this->connexion = SqliteConnexion::getInstance()->getConnexion();
     }
 
+
+    //region PUBLIC INSTANCE
     /**
      * Méthode permettant d'ajouter une partie terminée de 2048 dans la base de donnée et de supprimer la partie en cours correspondante.
      * @param string $pseudo le pseudo du joueur
@@ -48,7 +56,6 @@ class DAOParties {
             throw new SQLException("Problème requête SQL sur la table current_parties");
         }
     }
-
 
     /**
      * Méthode permettant de créer une nouvelle partie en cours dans la base de donnée.
@@ -183,7 +190,10 @@ class DAOParties {
             throw new SQLException("Problème requête SQL sur la table current_parties");
         }
     }
+    //endregion
 
+
+    //region PRIVATE INSTANCE
     /**
      * Méthode permettant d'obtenir le numéro de la partie précédente.
      * @param string $pseudo le pseudo du joueur.
@@ -199,4 +209,6 @@ class DAOParties {
             throw new SQLException("Problème requête SQL sur la table current_parties");
         }
     }
+    //endregion
+
 }

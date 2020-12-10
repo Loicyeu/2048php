@@ -5,8 +5,14 @@ include_once PATH_MODELE."/SqliteConnexion.php";
 
 class DAOUser {
 
+    /**
+     * @var PDO La connexion SQLite
+     */
     private $connexion;
 
+    /**
+     * Constructeur de DAOUser.
+     */
     public function __construct() {
         $this->connexion = SqliteConnexion::getInstance()->getConnexion();
     }
