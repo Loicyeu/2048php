@@ -1,18 +1,77 @@
 <?php
 
 
+/**
+ * Classe représentant le plateau de jeu final avec les scores et les informations sur le joueur
+ */
 class GamePlateEnd {
 
-    public function __construct () {
+    //region ATTRIBUTES
+    private $dao;
+    private $pseudo;
+    //endregion
 
+
+    /**
+     * Constructeur de GamePlateEnd.
+     * @param string $pseudo Le pseudo du joueur
+     */
+    private function __construct (string $pseudo) {
+        $this->dao = new DAOParties();
+        $this->pseudo = $pseudo;
     }
 
-    public function to_html() : string {
-        $dao = new DAOParties();
+
+    //region STATIC
+    /**
+     * Méthode servant de constructeur pour la classe GamePlateEnd.
+     * @param string $pseudo Le pseudo du joueur.
+     * @return GamePlateEnd Une instance de la classe GamePlateEnd.
+     */
+    public static function build(string $pseudo): GamePlateEnd {
+        return new GamePlateEnd($pseudo);
+    }
+    //endregion
+
+
+    //region PUBLIC INSTANCE
+    /**
+     * @param string $gameplate Le plateau de jeu.
+     * @return string Le pleateu de jeu final avec les scores et les informations sur le joueur.
+     * @throws CreateHTMLException Si le HTML n'a pu être générer.
+     */
+    public function to_html(string $gameplate): string {
+        return <<<EOF
+            <div class="m-5 d-flex">
+                <div>
+                    $gameplate
+                </div>
+                {$this->create_score_tab()}
+            </div>
+        EOF;
+    }
+    //endregion
+
+
+    //region PRIVATE INSTANCE
+    /**
+     * @return string
+     */
+    private function get_player_informations(): string {
+        $str = "";
+        return $str;
+    }
+
+    /**
+     * Créer et met au format html le tableau des scores.
+     * @return string Retourne le tableau des scores au format html
+     * @throws CreateHTMLException Si le HTML n'a pu être générer.
+     */
+    private function create_score_tab(): string {
         try {
-            $scores = $dao->get_best_games(3);
-            $str =
-                "<div class='scoresTab'>
+            $scores = $this->dao->get_best_games(3);
+            $str = <<<EOF
+                <div class='scoresTab'>
                     <table class='table table-hover'>
                         <thead class='thead-light'>
                              <tr>
@@ -22,19 +81,23 @@ class GamePlateEnd {
                                 <th scope='col'>Gagné ?</th>
                              </tr>
                         </thead>
-                        <tbody>";
+                        <tbody>
+            EOF;
             for($i=1; $i<sizeof($scores)+1; $i++) {
-                $str .= "   <tr>
-                                <th scope='row'>".$i."</th>
-                                <td>".$scores[$i-1]['pseudo']."</td>
-                                <td>".$scores[$i-1]['score']."</td>
-                                <td>".($scores[$i-1]['win']==1?"Oui":"Non")."</td>   
-                            </tr>";
+                $str.=<<<EOF
+                    <tr>
+                        <th scope='row'>$i</th>
+                        <td>{$scores[$i-1]['pseudo']}</td>
+                        <td>{$scores[$i-1]['score']}</td>
+                EOF .  "<td>".($scores[$i-1]['win']==1 ? "Oui" : "Non")."</td>
+                    </tr>";
             }
             $str .= "</tbody></table></div>";
             return $str;
         } catch (SQLException $e) {
-
+            throw new CreateHTMLException("Le html n'a pas pu être généré du a une erreur SQL");
         }
     }
+    //endregion
+
 }

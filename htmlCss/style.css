@@ -89,12 +89,10 @@
     grid-template-rows: repeat(4,120px);
     border: 7px solid #BBADA0;
     border-radius: 0 0 5px 5px;
-    margin: 0 3%;
     background-color: #BBADA0;
 }
 .scoreHead{
     width: 494px;
-    margin: 3% 0 0 3%;
     display: flex;
     justify-content: space-between;
     background-color: #BBADA0;
@@ -121,7 +119,7 @@
 }
 
 form.move-grid{
-    position: absolute;
+    margin: auto 0;
     display: inline-grid;
     grid-template-columns: repeat(3,1fr);
     grid-template-rows: repeat(3,1fr);
@@ -135,11 +133,6 @@ form.move-grid button{
 form.move-grid button:hover{
     background-color: #BBADA0;
 }
-
-.scoreTab {
-    background-color: #F2B179;
-}
-
 .up{
     grid-column-start:2;
     grid-column-end:3;
@@ -178,7 +171,6 @@ div.menu{
     left: 0;
     height: 574px;
     width: 494px;
-    margin: 3%;
     background-color: rgba(245, 245, 245, 0.5);
 }
 
@@ -194,6 +186,10 @@ input.menu{
 }
 input.menu:hover{
     background-color: #BBADA0;
+}
+
+.scoreTab {
+    background-color: #F2B179;
 }
 
 h2.won{

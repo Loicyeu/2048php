@@ -142,34 +142,31 @@ class GamePlate {
     }
 
     /**
-     * Méthode permettant de récupéré le plateau de jeu et le score en HTML pour être affiché.
-     * @param bool $gameEnd Si la partie est terminé, par défaut non.
+     * Méthode permettant de récupérer le plateau de jeu et le score en HTML pour être affiché.
      * @return string Le plateau de jeu en version HTML.
      */
-    public function to_html(bool $gameEnd=false): string {
-        $str = "<div class='containerGame'>";
-        if(!$gameEnd){
-            $str .= "
-                <div class='scoreHead'>
-                    <div class='score'>Score : $this->score</div>
-                    <form action='/' method='get' class='scoreButtons'>
-                        <button type='submit' name='previous' title='Précédent'>
-                            <img src='/assets/backward-solid.svg' alt='Précédent'>
-                        </button>
-                        <button type='submit' name='reset' title='Recommencer'>
-                            <img src='/assets/redo-solid.svg' alt='Recommencer'>
-                        </button>
-                    </form>
-                </div>";
-        }
-        $str .= "<div class='grid-container".($gameEnd?" blur'>":"'>");
+    public function to_html(): string {
+        $str = <<<EOF
+            <div class='scoreHead'>
+                <div class='score'>Score : $this->score</div>
+                <form action='/' method='get' class='scoreButtons'>
+                    <button type='submit' name='previous' title='Précédent'>
+                        <img src='/assets/backward-solid.svg' alt='Précédent'>
+                    </button>
+                    <button type='submit' name='reset' title='Recommencer'>
+                        <img src='/assets/redo-solid.svg' alt='Recommencer'>
+                    </button>
+                </form>
+            </div>
+            <div class='grid-container'>
+        EOF;
         for($i=0; $i<4; $i++){
             for($j=0; $j<4; $j++) {
                 $value = $this->gamePlate[$i][$j]==0?"":$this->gamePlate[$i][$j];
                 $str .= "<div class='tile".($value!=""?" tile-$value":"")."'>$value</div>";
             }
         }
-        $str .= "</div></div>";
+        $str .= "</div>";
         return $str;
     }
     //endregion

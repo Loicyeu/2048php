@@ -26,10 +26,6 @@ class controllerGame {
      * @var DAOParties Le DAO des parties.
      */
     private $dao;
-    /**
-     * @var GamePlateEnd Le plateau de jeu de fin.
-     */
-    private $gamePlateEnd;
     //endregion
 
 
@@ -41,7 +37,6 @@ class controllerGame {
         $this->vueResult = new VueResult();
         $this->vueError = new VueError();
         $this->dao = new DAOParties();
-        $this->gamePlateEnd = new GamePlateEnd();
     }
 
 
@@ -60,9 +55,9 @@ class controllerGame {
                 $gameplate = GamePlate::load($_SESSION["pseudo"]);
                 $res = $gameplate->move($_GET['move']);
                 if(true/*$res=="won"*/) {
-                    $this->vueResult->display(true, $gameplate->to_html(false).$this->gamePlateEnd->to_html());
+                    $this->vueResult->display(true, GamePlateEnd::build($_SESSION["pseudo"])->to_html($gameplate->to_html()));
                 }else if ($res=="lost") {
-                    $this->vueResult->display(false, $gameplate->to_html(false));
+                    $this->vueResult->display(false, $gameplate->to_html());
                 }else {
                     $this->vueGame->display($gameplate->to_html());
                 }
