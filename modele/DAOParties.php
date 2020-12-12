@@ -2,6 +2,7 @@
 
 include_once PATH_MODELE."/BDException.php";
 include_once PATH_MODELE."/SqliteConnexion.php";
+include_once PATH_METIER."/Player.php";
 
 class DAOParties {
 
@@ -43,15 +44,38 @@ class DAOParties {
 
     /**
      * Méthode permettant de récupérer les <code>number</code> meilleurs scores.
-     * @param int $number Le numbre de meilleurs score a prendre.
-     * @return array ret
-     * @throws SQLException
+     * @param int $number Le nombre de meilleurs score a prendre.
+     * @return array Un tableau de tableau comportant les pseudos, scores et si les joueurs ont gagnés.
+     * @throws SQLException Si une erreur se passe lors de la requête SQL.
      */
     public function get_best_games(int $number): array {
         try{
             $statement = $this->connexion->prepare("SELECT pseudo, gagne as win, score FROM PARTIES ORDER BY score DESC LIMIT ?");
             $statement->execute(array($number));
             return $statement->fetchAll(PDO::FETCH_ASSOC);
+        }catch (PDOException $e) {
+            throw new SQLException("Problème requête SQL sur la table current_parties");
+        }
+    }
+
+    /**
+     * Méthode permettant de récupérer le nombre de parties jouées, de parties gagnées et le meilleur score du joueur.
+     * @param string $pseudo le pseudo du joueur.
+     * @return Player Un player avec les données souhaitées.
+     * @throws SQLException Si une erreur se passe lors de la requête SQL.
+     */
+    public function get_player_informations(string $pseudo): Player {
+        try{
+            $statement = $this->connexion->prepare("SELECT score as bestScore FROM PARTIES WHERE pseudo=? ORDER BY score DESC LIMIT 1");
+            $statement->execute(array($pseudo));
+            $result1 = $statement->fetchAll(PDO::FETCH_COLUMN);
+            $statement = $this->connexion->prepare("SELECT COUNT(pseudo) as nbGame FROM PARTIES WHERE pseudo=?");
+            $statement->execute(array($pseudo));
+            $result2 = $statement->fetchAll(PDO::FETCH_COLUMN);
+            $statement = $this->connexion->prepare("SELECT COUNT(pseudo) as nbGameWin FROM PARTIES WHERE pseudo=? AND gagne=1");
+            $statement->execute(array($pseudo));
+            $result3 = $statement->fetchAll(PDO::FETCH_COLUMN);
+            return new Player($pseudo, $result1[0], $result2[0], $result3[0]);
         }catch (PDOException $e) {
             throw new SQLException("Problème requête SQL sur la table current_parties");
         }

@@ -7,10 +7,13 @@
  */
 class Player {
 
+    //region ATTRIBUTES
     private $pseudo;
     private $bestScore;
     private $nbGame;
     private $nbGameWin;
+    //endregion
+
 
     /**
      * Constructeur de la classe Player.
@@ -26,6 +29,27 @@ class Player {
         $this->nbGameWin = $nbGameWin;
     }
 
+    public function to_html(): string {
+        $ratio = number_format($this->nbGameWin/$this->nbGame, 2);
+        return <<<EOF
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title text-center">$this->pseudo</h4>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Meilleur score : <b>$this->bestScore pts</b></li>
+                    <li class="list-group-item">Parties jouées : <b>$this->nbGame</b></li>
+                    <li class="list-group-item">Parties gagnées : <b>$this->nbGameWin</b></li>
+                    <li class="list-group-item">Ratio : <b>$ratio</b></li>
+                </ul>
+            </div>
+        </div>
+        EOF;
+    }
+
+
+    //region PUBLIC INSTANCE
     /**
      * Getter permettant de récupérer le pseudo du joueur.
      * @return string Le pseudo du joueur.
@@ -57,6 +81,6 @@ class Player {
     public function get_nbGameWin(): int {
         return $this->nbGameWin;
     }
-
+    //endregion
 
 }

@@ -1,5 +1,6 @@
 <?php
 
+include_once PATH_METIER."/CreateHTMLException.php";
 
 /**
  * Classe représentant le plateau de jeu final avec les scores et les informations sur le joueur
@@ -43,10 +44,13 @@ class GamePlateEnd {
     public function to_html(string $gameplate): string {
         return <<<EOF
             <div class="m-5 d-flex">
-                <div>
+                <div class="mr-5">
                     $gameplate
                 </div>
-                {$this->create_score_tab()}
+                <div class="my-auto">
+                    {$this->create_player_informations()}
+                    {$this->create_score_tab()}
+                </div>
             </div>
         EOF;
     }
@@ -56,16 +60,22 @@ class GamePlateEnd {
     //region PRIVATE INSTANCE
     /**
      * @return string
+     * @throws CreateHTMLException Si le HTML n'a pu être générer a cause d'une erreur SQL.
      */
-    private function get_player_informations(): string {
-        $str = "";
-        return $str;
+    private function create_player_informations(): string {
+        try{
+            return $this->dao->get_player_informations($this->pseudo)->to_html();
+            $str = "";
+            return $str;
+        }catch (SQLException $e){
+            throw new CreateHTMLException("Le html n'a pas pu être généré du a une erreur SQL");
+        }
     }
 
     /**
      * Créer et met au format html le tableau des scores.
-     * @return string Retourne le tableau des scores au format html
-     * @throws CreateHTMLException Si le HTML n'a pu être générer.
+     * @return string Retourne le tableau des scores au format html.
+     * @throws CreateHTMLException Si le HTML n'a pu être générer a cause d'une erreur SQL.
      */
     private function create_score_tab(): string {
         try {
