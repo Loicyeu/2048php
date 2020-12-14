@@ -54,7 +54,7 @@ class controllerGame {
             }else if(isset($_GET['move'])){
                 $gameplate = GamePlate::load($_SESSION["pseudo"]);
                 $res = $gameplate->move($_GET['move']);
-                if(true/*$res=="won"*/) {
+                if($res=="won") {
                     $this->vueResult->display(true, GamePlateEnd::build($_SESSION["pseudo"])->to_html($gameplate->to_html()));
                 }else if ($res=="lost") {
                     $this->vueResult->display(false, $gameplate->to_html());

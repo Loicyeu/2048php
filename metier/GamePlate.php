@@ -115,9 +115,14 @@ class GamePlate {
      */
     public function move(string $move): string {
 
+        $before = $this->gamePlate;
+
         $this->arrange($move);
         $this->fusion($move);
         $this->arrange($move);
+
+        $after = $this->gamePlate;
+
 
         if($this->has_won()) {
             $this->dao->add_score($this->pseudo, true, $this->score);
@@ -131,11 +136,13 @@ class GamePlate {
             }
         }
 
-        do {
-            $randValueX = rand(0,3);
-            $randValueY = rand(0,3);
-        } while($this->gamePlate[$randValueX][$randValueY] != 0);
-        $this->gamePlate[$randValueX][$randValueY] = 4/rand(1,2);
+        if($before != $after) {
+            do {
+                $randValueX = rand(0,3);
+                $randValueY = rand(0,3);
+            } while($this->gamePlate[$randValueX][$randValueY] != 0);
+            $this->gamePlate[$randValueX][$randValueY] = 4/rand(1,2);
+        }
 
         $this->dao->update_current_game($this->pseudo, $this->gamePlate, $this->score);
         return "continue";
@@ -271,7 +278,7 @@ class GamePlate {
     private function has_won(): bool {
         for($i = 0; $i < 4; $i++) {
             for($j = 1; $j < 4; $j++) {
-                if($this->gamePlate[$i][$j] == 32) {
+                if($this->gamePlate[$i][$j] == 2048) {
                     return true;
                 }
             }
@@ -284,14 +291,6 @@ class GamePlate {
      * @return bool Vrai si la grille est pleine et sans possibilité de fusion, faux sinon.
      */
     private function is_full(): bool {
-//        for ($i=0; $i<3 ;$i++) {
-//            for ($j=0; $j<3 ;$j++) {
-//                if($this->gamePlate[$i][$j]==$this->gamePlate[$i][$j+1] && $this->gamePlate[$i][$j]!=0) {
-//                    return false;
-//                }
-//            }
-//        }
-//        return true;
         for($i=0; $i<3; $i++) {
             for($j=0; $j<3; $j++) {
                 if(
@@ -309,6 +308,10 @@ class GamePlate {
                 {
                     return false;
                 }
+            }
+            if($this->gamePlate[$i][3] == $this->gamePlate[$i+1][3]
+                || $this->gamePlate[3][$i] == $this->gamePlate[3][$i+1]) {
+                return false;
             }
         }
         return true;
