@@ -38,7 +38,7 @@ class GamePlateEnd {
     //region PUBLIC INSTANCE
     /**
      * @param string $gameplate Le plateau de jeu.
-     * @return string Le pleateu de jeu final avec les scores et les informations sur le joueur.
+     * @return string Le plateau de jeu final avec les scores et les informations sur le joueur.
      * @throws CreateHTMLException Si le HTML n'a pu être générer.
      */
     public function to_html(string $gameplate): string {
@@ -65,8 +65,6 @@ class GamePlateEnd {
     private function create_player_informations(): string {
         try{
             return $this->dao->get_player_informations($this->pseudo)->to_html();
-            $str = "";
-            return $str;
         }catch (SQLException $e){
             throw new CreateHTMLException("Le html n'a pas pu être généré du a une erreur SQL");
         }
@@ -82,8 +80,8 @@ class GamePlateEnd {
             $scores = $this->dao->get_best_games(3);
             $str = <<<EOF
                 <div class='scoresTab'>
-                    <table class='table table-hover'>
-                        <thead class='thead-light'>
+                    <table class='table'>
+                        <thead class='bg-grey2048'>
                              <tr>
                                 <th scope='col'>#</th>
                                 <th scope='col'>Pseudo</th>
@@ -94,8 +92,8 @@ class GamePlateEnd {
                         <tbody>
             EOF;
             for($i=1; $i<sizeof($scores)+1; $i++) {
-                $str.=<<<EOF
-                    <tr>
+                $str .= <<<EOF
+                    <tr class="bg-lgrey2048">
                         <th scope='row'>$i</th>
                         <td>{$scores[$i-1]['pseudo']}</td>
                         <td>{$scores[$i-1]['score']}</td>

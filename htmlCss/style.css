@@ -1,3 +1,13 @@
+/*region GENERAL*/
+.bg-lgrey2048 {
+    background-color: #CDC1B4 !important;
+}
+
+.bg-grey2048 {
+    background-color: #BBADA0 !important;
+}
+/*endregion*/
+
 /*region TILES*/
 .tile{
     background-color: #CDC1B4;
@@ -200,6 +210,14 @@ h2.lost{
     color: lightcoral;
     text-align: center;
 }
+
+tr.bg-lgrey2048 > td, tr.bg-lgrey2048 > th{
+    border-top: 1px solid rgba(0,0,0,.125);
+}
+table thead tr th {
+    border-bottom: 2px solid rgba(0,0,0,.125) !important;
+}
+
 /*endregion*/
 
 /*region FORM LOGIN*/
