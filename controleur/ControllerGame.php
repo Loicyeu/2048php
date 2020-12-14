@@ -57,7 +57,7 @@ class controllerGame {
                 if($res=="won") {
                     $this->vueResult->display(true, GamePlateEnd::build($_SESSION["pseudo"])->to_html($gameplate->to_html()));
                 }else if ($res=="lost") {
-                    $this->vueResult->display(false, $gameplate->to_html());
+                    $this->vueResult->display(false, GamePlateEnd::build($_SESSION['pseudo'])->to_html($gameplate->to_html()));
                 }else {
                     $this->vueGame->display($gameplate->to_html());
                 }
@@ -65,7 +65,7 @@ class controllerGame {
             }else {
                 $this->vueGame->display(GamePlate::load($_SESSION["pseudo"])->to_html());
             }
-        } catch (SQLException $e) {
+        } catch (SQLException | CreateHTMLException $e) {
             $this->vueError->display($e->getMessage());
         }
     }

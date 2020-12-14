@@ -1,4 +1,8 @@
 /*region GENERAL*/
+body {
+    background-color: #f5f5f5 !important;
+}
+
 .bg-lgrey2048 {
     background-color: #CDC1B4 !important;
 }
@@ -167,15 +171,14 @@ form.move-grid button:hover{
     grid-row-start:3;
     grid-row-end:3;
 }
-
-button {
+.btn-square {
     height: 50px;
     width: 50px;
 }
 /*endregion*/
 
 /*region GAMEPLATE MENUS*/
-div.menu{
+div.menu, form.menu{
     position: absolute;
     top: 0;
     left: 0;
@@ -203,11 +206,11 @@ input.menu:hover{
 }
 
 h2.won{
-    color: lightgreen;
+    color: green;
     text-align: center;
 }
 h2.lost{
-    color: lightcoral;
+    color: red;
     text-align: center;
 }
 

@@ -21,7 +21,12 @@ class Router {
      */
     public function route() {
         if(isset($_SESSION['pseudo'])){
-            $this->controllerGame->play();
+            if(isset($_POST["disconnect"])){
+                session_unset();
+                $this->controllerLogin->login();
+            } else {
+                $this->controllerGame->play();
+            }
         }else if(isset($_GET["register"])) {
             $this->controllerRegister->register();
         }else{

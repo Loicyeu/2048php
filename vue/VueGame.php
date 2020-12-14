@@ -14,16 +14,16 @@ class VueGame {
                     $html
                 </div>
                 <form action='/' method='GET' class='move-grid'>
-                    <button type='submit' name='move' value='up' class='up'>
+                    <button type='submit' name='move' value='up' class='up btn-square'>
                         <img src='assets/arrow-up-solid.svg' alt='/\'/>
                     </button>
-                    <button type='submit' name='move' value='left' class='left'>
+                    <button type='submit' name='move' value='left' class='left btn-square'>
                         <img src='assets/arrow-left-solid.svg' alt='>'/>
                     </button>
-                    <button type='submit' name='move' value='right' class='right'>
+                    <button type='submit' name='move' value='right' class='right btn-square'>
                         <img src='assets/arrow-right-solid.svg' alt='V'/>
                     </button>
-                    <button type='submit' name='move' value='down' class='down'>
+                    <button type='submit' name='move' value='down' class='down btn-square'>
                         <img src='assets/arrow-down-solid.svg' alt='<'/>
                     </button>
                 </form>

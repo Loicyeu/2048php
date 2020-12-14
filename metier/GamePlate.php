@@ -157,10 +157,10 @@ class GamePlate {
             <div class='scoreHead'>
                 <div class='score'>Score : $this->score</div>
                 <form action='/' method='get' class='scoreButtons'>
-                    <button type='submit' name='previous' title='Précédent'>
+                    <button class="btn-square" type='submit' name='previous' title='Précédent'>
                         <img src='/assets/backward-solid.svg' alt='Précédent'>
                     </button>
-                    <button type='submit' name='reset' title='Recommencer'>
+                    <button class="btn-square" type='submit' name='reset' title='Recommencer'>
                         <img src='/assets/redo-solid.svg' alt='Recommencer'>
                     </button>
                 </form>
