@@ -32,16 +32,16 @@ class Player {
     public function to_html(): string {
         $ratio = number_format($this->nbGameWin/$this->nbGame, 2);
         return <<<EOF
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title text-center">$this->pseudo</h4>
+        <div class="card rounded border-0 mb-2">
+            <div class="card-header bg-grey2048">
+                <h4 class="card-title text-center m-0">$this->pseudo</h4>
             </div>
-            <div class="card-body">
+            <div class="card-body bg-lgrey2048 rounded-bottom">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Meilleur score : <b>$this->bestScore pts</b></li>
-                    <li class="list-group-item">Parties jouées : <b>$this->nbGame</b></li>
-                    <li class="list-group-item">Parties gagnées : <b>$this->nbGameWin</b></li>
-                    <li class="list-group-item">Ratio : <b>$ratio</b></li>
+                    <li class="list-group-item bg-lgrey2048">Meilleur score : <b>$this->bestScore pts</b></li>
+                    <li class="list-group-item bg-lgrey2048">Parties jouées : <b>$this->nbGame</b></li>
+                    <li class="list-group-item bg-lgrey2048">Parties gagnées : <b>$this->nbGameWin</b></li>
+                    <li class="list-group-item bg-lgrey2048">Ratio : <b>$ratio</b></li>
                 </ul>
             </div>
         </div>
