@@ -48,6 +48,8 @@ class GamePlate {
      * @return GamePlate Le nouveau plateau de jeu.
      */
     public static function create_new(string $pseudo): GamePlate {
+//        $gamePlate = array(array(128, 32, 4, 2), array(256, 32, 8, 4), array(1024, 256, 64, 8), array(1024, 512, 128, 64));
+//        Pour commencer sur une partie gagnante au prochain coup, dé-commentez la ligne ci dessus et commentez les 6 prochaines lignes
         $gamePlate = array(array(0, 0, 0, 0), array(0, 0, 0, 0), array(0, 0, 0, 0), array(0, 0, 0, 0));
         $firstValueIndex = rand(0,15);
         do $secondValueIndex = rand(0,15);
@@ -282,7 +284,7 @@ class GamePlate {
      */
     private function has_won(): bool {
         for($i = 0; $i < 4; $i++) {
-            for($j = 1; $j < 4; $j++) {
+            for($j = 0; $j < 4; $j++) {
                 if($this->gamePlate[$i][$j] == 2048) {
                     return true;
                 }
