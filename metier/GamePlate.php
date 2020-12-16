@@ -46,21 +46,23 @@ class GamePlate {
      * Génère un nouveau plateau de jeu avec deux carreaux initialisé à 2 et placé aléatoirement.
      * @param string $pseudo Le pseudo du joueur.
      * @return GamePlate Le nouveau plateau de jeu.
+     * @throws SQLException Si une erreur SQL se produit.
      */
     public static function create_new(string $pseudo): GamePlate {
 //        $gamePlate = array(array(128, 32, 4, 2), array(256, 32, 8, 4), array(1024, 256, 64, 8), array(1024, 512, 128, 64));
 //        Pour commencer sur une partie gagnante au prochain coup, dé-commentez la ligne ci dessus et commentez les 6 prochaines lignes
         $gamePlate = array(array(0, 0, 0, 0), array(0, 0, 0, 0), array(0, 0, 0, 0), array(0, 0, 0, 0));
         $firstValueIndex = rand(0,15);
-        do $secondValueIndex = rand(0,15);
-        while($secondValueIndex == $firstValueIndex);
+        do {
+            $secondValueIndex = rand(0,15);
+        } while($secondValueIndex == $firstValueIndex);
         $gamePlate[floor($firstValueIndex/4)][$firstValueIndex%4] = 2;
         $gamePlate[floor($secondValueIndex/4)][$secondValueIndex%4] = 2;
         $dao = new DAOParties();
         try{
             $dao->create_current_game($pseudo, $gamePlate, 0);
         } catch (SQLException $e) {
-            //TODO
+            throw new SQLException($e->getMessage());
         }
         return new GamePlate($pseudo, $gamePlate, 0);
     }
@@ -131,11 +133,9 @@ class GamePlate {
             return "won";
         }
 
-        if(!$this->any_zeros()) {
-            if($this->is_full()) {
-                $this->dao->add_score($this->pseudo, false, $this->score);
-                return "lost";
-            }
+        if(!$this->any_zeros() && $this->is_full()) {
+            $this->dao->add_score($this->pseudo, false, $this->score);
+            return "lost";
         }
 
         if($before != $after) {
@@ -180,8 +180,7 @@ class GamePlate {
                 $str .= "<div class='tile".($value!=""?" tile-$value":"")."'>$value</div>";
             }
         }
-        $str .= "</div>";
-        return $str;
+        return $str . "</div>";
     }
     //endregion
 
@@ -331,7 +330,9 @@ class GamePlate {
     private function any_zeros() : bool {
         for($i=0; $i<4; $i++) {
             for($j=0; $j<4; $j++) {
-                if($this->gamePlate[$i][$j] == 0) return true;
+                if($this->gamePlate[$i][$j] == 0) {
+                    return true;
+                }
             }
         }
         return false;

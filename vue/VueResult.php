@@ -1,7 +1,16 @@
 <?php
 
+/**
+ * Classe VueResult.
+ * Vue représentant la fin de partie.
+ */
 class VueResult {
 
+    /**
+     * Méthode permettant l'affichage de la vue de fin de partie.
+     * @param bool $win Vrai si la partie est gagnée, faux sinon.
+     * @param string $html Un string qui représente le code HTML à afficher.
+     */
     public function display(bool $win, string $html) {
         include(PATH_HTMLCSS . "/htmlHead.php");
         echo <<<EOF

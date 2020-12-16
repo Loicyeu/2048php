@@ -1,11 +1,17 @@
 <?php
 
-class VueLogin
-{
+/**
+ * Classe VueLogin.
+ * Vue représentant la connexion au jeu.
+ */
+class VueLogin {
 
+    /**
+     * Méthode permettant d'afficher la vue pour se connecter.
+     */
     public function display() {
         include(PATH_HTMLCSS . "/htmlHead.php");
-        echo "
+        echo <<<EOF
         <div class='text-center h-100 pt-5'>
             <form class='w-25 m-auto form-section' action='/' method='post'>
                 <img class='mb-4' src='assets/2048_logo.png' alt='' width='72' height='72'>
@@ -22,13 +28,13 @@ class VueLogin
                 </div>
 
                 <br>
-                <input type='submit' value='Se connecter'  class='btn btn-lg btn-primary btn-block'>
+                <input type='submit' value='Se connecter' class='btn btn-lg btn-primary btn-block'>
                 <br>
                 <a href='?register' class='text-success'>Créer un compte ?</a>
                 <p class='mt-5 mb-3 text-muted'>Timothé CABON et Loïc HENRY<br>© 2020-2021</p>
             </form>
         </div>
-        ";
+        EOF;
         include(PATH_HTMLCSS . "/htmlFoot.php");
     }
 

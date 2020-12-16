@@ -1,11 +1,17 @@
 <?php
 
-
+/**
+ * Classe VueRegister.
+ * Vue représentant l'inscription au jeu.
+ */
 class VueRegister {
 
+    /**
+     * Méthode permettant l'affichage de la vue pour s'inscrire.
+     */
     public function display() {
         include(PATH_HTMLCSS . "/htmlHead.php");
-        echo "
+        echo <<<EOF
         <div class='text-center h-100 pt-5'>
             <form class='w-25 m-auto form-section' action='/?register' method='post'>
                 <img class='mb-4' src='assets/2048_logo.png' alt='' width='72' height='72'>
@@ -33,7 +39,7 @@ class VueRegister {
                 <p class='mt-5 mb-3 text-muted'>Timothé CABON et Loïc HENRY<br>© 2020-2021</p>
             </form>
         </div>
-        ";
+        EOF;
         include(PATH_HTMLCSS . "/htmlFoot.php");
     }
 

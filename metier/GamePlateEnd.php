@@ -3,12 +3,18 @@
 include_once PATH_METIER."/CreateHTMLException.php";
 
 /**
- * Classe représentant le plateau de jeu final avec les scores et les informations sur le joueur
+ * Classe représentant le plateau de jeu final avec les scores et les informations sur le joueur.
  */
 class GamePlateEnd {
 
     //region ATTRIBUTES
+    /**
+     * @var DAOParties Le DAO de la table JOUEURS.
+     */
     private $dao;
+    /**
+     * @var string Le pseudo du joueur.
+     */
     private $pseudo;
     //endregion
 
@@ -59,7 +65,8 @@ class GamePlateEnd {
 
     //region PRIVATE INSTANCE
     /**
-     * @return string
+     * Méthode permettant de créer et de mettre au format HTML les statistiques du joueur.
+     * @return string Retourne les statistiques du joueur au format HTML.
      * @throws CreateHTMLException Si le HTML n'a pu être générer a cause d'une erreur SQL.
      */
     private function create_player_informations(): string {
@@ -71,8 +78,8 @@ class GamePlateEnd {
     }
 
     /**
-     * Créer et met au format html le tableau des scores.
-     * @return string Retourne le tableau des scores au format html.
+     * Méthode permettant de créer et de mettre au format HTML le tableau des scores.
+     * @return string Retourne le tableau des scores au format HTML.
      * @throws CreateHTMLException Si le HTML n'a pu être générer a cause d'une erreur SQL.
      */
     private function create_score_tab(): string {
@@ -100,8 +107,7 @@ class GamePlateEnd {
                 EOF .  "<td>".($scores[$i-1]['win']==1 ? "Oui" : "Non")."</td>
                     </tr>";
             }
-            $str .= "</tbody></table></div>";
-            return $str;
+            return $str . "</tbody></table></div>";
         } catch (SQLException $e) {
             throw new CreateHTMLException("Le html n'a pas pu être généré du a une erreur SQL");
         }

@@ -3,12 +3,21 @@
 include_once PATH_MODELE."/BDException.php";
 include_once PATH_MODELE."/SqliteConnexion.php";
 
+/**
+ * Classe DAOUser.
+ * Gère la classe JOUEURS.
+ */
 class DAOUser {
 
+    //region ATTRIBUTES
     /**
      * @var PDO La connexion SQLite
      */
     private $connexion;
+
+    private const ERROR_MESSAGE_JOUEURS = "Problème requête SQL sur la table joueur";
+    //endregion
+
 
     /**
      * Constructeur de DAOUser.
@@ -17,6 +26,8 @@ class DAOUser {
         $this->connexion = SqliteConnexion::getInstance()->getConnexion();
     }
 
+
+    //region PUBLIC INSTANCE
     /**
      * Méthode permettant de savoir si un couple pseudo/mot de passe existe.
      * @param string $pseudo Le pseudo a tester
@@ -31,7 +42,7 @@ class DAOUser {
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             return password_verify($password, $result["password"]);
         } catch(PDOException $e) {
-            throw new SQLException("Problème requête SQL sur la table joueur");
+            throw new SQLException(self::ERROR_MESSAGE_JOUEURS);
         }
     }
 
@@ -47,7 +58,7 @@ class DAOUser {
             $statement->execute(array($pseudo));
             return  $statement->fetch(PDO::FETCH_ASSOC);
         } catch(PDOException $e) {
-            throw new SQLException("Problème requête SQL sur la table joueur");
+            throw new SQLException(self::ERROR_MESSAGE_JOUEURS);
         }
     }
 
@@ -64,8 +75,9 @@ class DAOUser {
             $statement->execute(array($pseudo, password_hash($password, PASSWORD_DEFAULT)));
             return $statement->fetch(PDO::FETCH_ASSOC)==1;
         } catch(PDOException $e) {
-            throw new SQLException("Problème requête SQL sur la table joueur");
+            throw new SQLException(self::ERROR_MESSAGE_JOUEURS);
         }
     }
+    //endregion
 
 }

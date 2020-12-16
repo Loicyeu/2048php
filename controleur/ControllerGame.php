@@ -4,10 +4,13 @@ include_once PATH_VUE."/VueGame.php";
 include_once PATH_VUE."/VueResult.php";
 include_once PATH_VUE."/VueError.php";
 include_once PATH_METIER . "/GamePlate.php";
-include_once PATH_MODELE."/DAOParties.php";
 include_once PATH_METIER . "/GamePlateEnd.php";
 
-class controllerGame {
+/**
+ * Classe controllerGame.
+ * Contrôleur gérant la partie de jeu ainsi que la fin de partie.
+ */
+class ControllerGame {
 
     //region ATTRIBUTES
     /**
@@ -22,21 +25,16 @@ class controllerGame {
      * @var VueError La vue des erreurs.
      */
     private $vueError;
-    /**
-     * @var DAOParties Le DAO des parties.
-     */
-    private $dao;
     //endregion
 
 
     /**
-     * controllerGame constructor.
+     * Constructeur de controllerGame.
      */
     public function __construct() {
         $this->vueGame = new VueGame();
         $this->vueResult = new VueResult();
         $this->vueError = new VueError();
-        $this->dao = new DAOParties();
     }
 
 

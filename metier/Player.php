@@ -2,15 +2,27 @@
 
 
 /**
- * Classe Player
+ * Classe Player.
  * Représente un joueur avec ses statistiques.
  */
 class Player {
 
     //region ATTRIBUTES
+    /**
+     * @var string Le pseudo du joueur.
+     */
     private $pseudo;
+    /**
+     * @var int Le meilleur score du joueur.
+     */
     private $bestScore;
+    /**
+     * @var int Le nombre de parties du joueur.
+     */
     private $nbGame;
+    /**
+     * @var int nombre de parties gagnées.
+     */
     private $nbGameWin;
     //endregion
 
@@ -29,6 +41,12 @@ class Player {
         $this->nbGameWin = $nbGameWin;
     }
 
+
+    //region PUBLIC INSTANCE
+    /**
+     * Méthode permettant de récupéré les statistiques du joueur en HTML pour être affiché.
+     * @return string Les statistiques du joueur en HTML.
+     */
     public function to_html(): string {
         $ratio = number_format($this->nbGameWin/$this->nbGame, 2);
         return <<<EOF
@@ -48,8 +66,6 @@ class Player {
         EOF;
     }
 
-
-    //region PUBLIC INSTANCE
     /**
      * Getter permettant de récupérer le pseudo du joueur.
      * @return string Le pseudo du joueur.

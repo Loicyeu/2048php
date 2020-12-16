@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Class BDException
- * Classe générale de définition d'exception
+ * Classe BDException.
+ * Classe générale de définition d'exception.
  */
 class BDException extends Exception {
 
@@ -13,8 +13,8 @@ class BDException extends Exception {
 }
 
 /**
- * Class ConnexionException
- * Exception relative à un probleme de connexion
+ * Classe ConnexionException.
+ * Exception relative à un problème de connexion.
  */
 class ConnexionException extends BDException {
 
@@ -26,8 +26,8 @@ class ConnexionException extends BDException {
 }
 
 /**
- * Class SQLException
- * Exception relative à un probleme SQL
+ * Classe SQLException.
+ * Exception relative à un problème SQL.
  */
 class SQLException extends BDException {
 
