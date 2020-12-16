@@ -43,10 +43,10 @@ class VueGame {
             <div class='scoreHead'>
                 <div class='score'>Score : 0</div>
                 <div class='scoreButtons'>
-                    <button title='Précédent'>
+                    <button title='Précédent' class='btn-square'>
                         <img src='/assets/backward-solid.svg' alt='Précédent'>
                     </button>
-                    <button title='Recommencer'>
+                    <button title='Recommencer' class='btn-square'>
                         <img src='/assets/redo-solid.svg' alt='Recommencer'>
                     </button>
                 </div>
