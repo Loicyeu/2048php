@@ -144,6 +144,11 @@ class GamePlate {
             $this->gamePlate[$randValueX][$randValueY] = 4/rand(1,2);
         }
 
+        if($this->is_full()) {
+            $this->dao->add_score($this->pseudo, false, $this->score);
+            return "lost";
+        }
+
         $this->dao->update_current_game($this->pseudo, $this->gamePlate, $this->score);
         return "continue";
     }
