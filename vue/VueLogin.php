@@ -26,7 +26,7 @@ class VueLogin {
                     <input type='password' id='password' name='password' class='form-control' placeholder='Mot de passe' required>
                     <label for='password'>Mot de passe</label>
                 </div>
-
+                
                 <br>
                 <input type='submit' value='Se connecter' class='btn btn-lg btn-primary btn-block'>
                 <br>

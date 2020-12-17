@@ -21,7 +21,7 @@ class VueRegister {
                     <input type='text' id='pseudo' name='pseudo' class='form-control' placeholder='Pseudo' required autofocus>
                     <label for='pseudo'>Pseudo</label>
                 </div>
-            
+                
                 <div class='form-label-group'>
                     <input type='password' id='password' name='password' class='form-control' placeholder='Mot de passe' required>
                     <label for='password'>Mot de passe</label>
@@ -31,7 +31,7 @@ class VueRegister {
                     <input type='password' id='passwordRepeat' name='passwordRepeat' class='form-control' placeholder='Répéter mot de passe' required>
                     <label for='passwordRepeat'>Répéter mot de passe</label>
                 </div>
-
+                
                 <br>
                 <input type='submit' value='Créer le compte'  class='btn btn-lg btn-primary btn-block'>
                 <br>
